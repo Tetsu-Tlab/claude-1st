@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Claude Lab for Teachers｜T-Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0e0e12; --ink-2:#2a2a32; --ink-3:#4a4a55;
+  --paper:#fafaf7; --paper-2:#f1f0eb; --line:#d8d6cf;
+  --accent:#b8552a; --accent-2:#d97548; --lime:#f4c95d;
+  --warn:#e7b21f; --warn-bg:#fff6da;
+  --good:#3a8a5a; --good-bg:#e6f3eb;
+  --shadow-sm:0 1px 2px rgba(14,14,18,.06);
+  --shadow-md:0 6px 24px rgba(14,14,18,.08);
+  --shadow-lg:0 16px 48px rgba(14,14,18,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:400;color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:"JetBrains Mono",ui-monospace,"SFMono-Regular",monospace}
+code{background:var(--paper-2);padding:.1em .4em;border-radius:4px;font-size:.9em;border:1px solid var(--line)}
+pre{background:#15151a;color:#e8e8eb;padding:1.4rem 1.6rem;border-radius:12px;overflow-x:auto;font-size:.85rem;line-height:1.7;margin:1.2rem 0;box-shadow:var(--shadow-md)}
+pre code{background:transparent;border:none;padding:0;color:inherit;font-size:inherit}
+hr.div{border:none;border-top:1px solid var(--line);margin:3rem 0}
+
+.gate{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(184,85,42,.10),transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(244,201,93,.12),transparent 55%),var(--paper);display:flex;align-items:center;justify-content:center;z-index:9999;padding:2rem}
+.gate__inner{max-width:520px;width:100%;background:#fff;border:1px solid var(--line);border-radius:18px;padding:3rem 2.4rem 2rem;box-shadow:var(--shadow-md);text-align:center}
+.gate__brand{display:flex;align-items:baseline;justify-content:center;gap:.6rem;margin-bottom:2rem}
+.gate__brandMark{font-family:"Noto Serif JP",serif;font-weight:900;font-size:1.4rem;letter-spacing:.05em}
+.gate__brandSub{font-size:.75rem;letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
+.gate__title{font-family:"Noto Serif JP",serif;font-size:1.6rem;font-weight:700;line-height:1.45;margin:0 0 1.4rem}
+.gate__lead{font-size:.92rem;color:var(--ink-3);margin-bottom:2rem;line-height:1.8}
+.gate__form{display:flex;gap:.6rem;margin-bottom:.8rem}
+.gate__form input{flex:1;padding:.85rem 1rem;border:1px solid var(--line);border-radius:10px;font-size:1rem;font-family:inherit;background:var(--paper);outline:none;transition:border-color .2s}
+.gate__form input:focus{border-color:var(--accent);background:#fff}
+.gate__form button{background:var(--ink);color:#fff;border:none;border-radius:10px;padding:.85rem 1.4rem;font-size:.95rem;font-weight:700;font-family:inherit;cursor:pointer;transition:background .2s,transform .15s}
+.gate__form button:hover{background:var(--accent)}
+.gate__form button:active{transform:scale(.97)}
+.gate__error{color:#c6362a;font-size:.85rem;min-height:1.4rem;margin:.4rem 0 1rem}
+.gate__small{font-size:.7rem;color:var(--ink-3);letter-spacing:.1em;margin-top:1.4rem}
+.gate.is-hidden{display:none!important}
+#site{display:none}
+body.is-unlocked #site{display:block}
+
+.topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(250,250,247,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar__logo{display:flex;align-items:baseline;gap:.5rem;color:var(--ink)}
+.topbar__logo:hover{text-decoration:none}
+.topbar__logoMark{font-family:"Noto Serif JP",serif;font-weight:900;font-size:1.1rem;letter-spacing:.05em}
+.topbar__logoSub{font-size:.7rem;letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
+.topbar__nav{display:flex;gap:1.4rem}
+.topbar__nav a{display:flex;align-items:center;gap:.4rem;color:var(--ink-2);font-size:.85rem;font-weight:500;letter-spacing:.04em}
+.topbar__nav a span{font-family:"JetBrains Mono",monospace;font-size:.68rem;background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:.1rem .4rem;color:var(--ink-3)}
+.topbar__nav a:hover{color:var(--accent);text-decoration:none}
+.topbar__nav a:hover span{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media(max-width:820px){.topbar{flex-wrap:wrap;padding:.8rem 1rem;gap:.6rem}.topbar__nav{width:100%;gap:.6rem;flex-wrap:wrap}.topbar__nav a{font-size:.75rem}}
+
+.hero{max-width:1100px;margin:0 auto;padding:6rem 2rem 5rem;position:relative}
+.hero__tag{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--line);padding:.3rem .8rem;border-radius:999px;margin-bottom:2rem}
+.hero__title{font-family:"Noto Serif JP",serif;font-weight:900;font-size:clamp(2.2rem,5.5vw,4.6rem);line-height:1.22;letter-spacing:-.01em;margin:0 0 2.4rem}
+.hero__accent{background:linear-gradient(120deg,transparent 0%,transparent 30%,var(--lime) 30%,var(--lime) 95%,transparent 95%);padding:0 .2em}
+.hero__lead{font-size:1.05rem;line-height:2.05;color:var(--ink-2);max-width:760px;margin:0 0 3rem}
+.hero__metaRow{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:3rem}
+.hero__meta{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem 1.2rem;font-size:.92rem;font-weight:500;box-shadow:var(--shadow-sm)}
+.hero__meta span{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-right:.6rem}
+.hero__cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:#fff;padding:1rem 1.8rem;border-radius:12px;font-weight:700;font-size:.95rem;transition:transform .15s,box-shadow .2s;box-shadow:var(--shadow-md)}
+.hero__cta:hover{text-decoration:none;transform:translateY(-2px);background:var(--accent);color:#fff;box-shadow:var(--shadow-lg)}
+.hero__cta span{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--lime);letter-spacing:.15em}
+.hero__scrollHint{font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.15em;color:var(--ink-3);margin-top:2.4rem}
+
+.section__head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.4rem;padding-bottom:1rem;border-bottom:2px solid var(--ink)}
+.section__num{font-family:"JetBrains Mono",monospace;font-size:.95rem;letter-spacing:.18em;color:var(--ink-3)}
+.section__title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);margin:0}
+.section__lead{font-size:1rem;line-height:2;color:var(--ink-2);margin:0 0 2.4rem;max-width:820px}
+
+.what{max-width:1100px;margin:0 auto;padding:4rem 2rem 5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2rem 1.8rem;position:relative;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.card__num{font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.18em;color:#fff;background:var(--ink);display:inline-flex;align-items:center;justify-content:center;width:1.8rem;height:1.8rem;border-radius:6px;margin-bottom:1rem}
+.card h3{font-family:"Noto Serif JP",serif;font-size:1.25rem;font-weight:700;margin:0 0 .8rem;line-height:1.5}
+.card p{font-size:.92rem;color:var(--ink-2);line-height:1.9;margin:0}
+
+.ba{max-width:1100px;margin:0 auto;padding:5rem 2rem;border-top:1px solid var(--line)}
+.ba__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:2rem 0}
+.ba__col{padding:1.8rem 1.6rem;border-radius:14px;border:1px solid var(--line)}
+.ba__col.before{background:#fff;color:var(--ink-2)}
+.ba__col.after{background:var(--ink);color:var(--paper)}
+.ba__label{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem;font-weight:600}
+.ba__col.before .ba__label{color:var(--accent)}
+.ba__col.after .ba__label{color:var(--lime)}
+.ba__col h4{font-family:"Noto Serif JP",serif;font-size:1.15rem;margin:0 0 1rem;line-height:1.5}
+.ba__col.after h4{color:var(--paper)}
+.ba__col ul{margin:0;padding-left:1.2rem;font-size:.92rem;line-height:1.9}
+.ba__col li{margin-bottom:.4rem}
+.ba__col strong{font-weight:700}
+.ba__col.after strong{color:var(--lime)}
+@media(max-width:720px){.ba__grid{grid-template-columns:1fr}}
+
+.stage{max-width:1100px;margin:0 auto;padding:5rem 2rem 4rem;border-top:1px solid var(--line)}
+.stage__cover{background:var(--ink);color:var(--paper);border-radius:18px;padding:3rem 2.4rem;margin-bottom:4rem;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.stage__cover:before{content:"";position:absolute;top:-40%;right:-10%;width:50%;height:160%;background:radial-gradient(ellipse,rgba(244,201,93,.18) 0%,transparent 60%);pointer-events:none}
+.stage__num{font-family:"JetBrains Mono",monospace;font-size:.85rem;letter-spacing:.25em;color:var(--lime);margin-bottom:1rem;position:relative}
+.stage__title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(1.8rem,3.6vw,2.8rem);margin:0 0 1.4rem;line-height:1.4;position:relative}
+.stage__lead{font-size:1rem;line-height:2;color:rgba(250,250,247,.85);margin:0 0 2rem;max-width:760px;position:relative}
+.stage__toc{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.4rem 1.4rem;border-top:1px solid rgba(255,255,255,.18);padding-top:1.6rem;position:relative}
+.stage__toc li a{display:block;color:rgba(250,250,247,.8);font-size:.92rem;padding:.4rem 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.stage__toc li a:hover{color:var(--lime);text-decoration:none}
+
+.lesson{margin-bottom:4rem;scroll-margin-top:90px}
+.lesson__head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.4rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lesson__no{font-family:"JetBrains Mono",monospace;font-size:.95rem;font-weight:600;color:var(--accent);letter-spacing:.12em}
+.lesson__head h3{font-family:"Noto Serif JP",serif;font-size:1.5rem;font-weight:700;margin:0;line-height:1.5}
+.lesson p{font-size:.96rem;line-height:2;color:var(--ink-2);margin:0 0 1.2rem}
+.lesson p strong{color:var(--ink)}
+
+.bulleted,.numbered{font-size:.96rem;line-height:2;color:var(--ink-2);margin:0 0 1.4rem;padding-left:1.4rem}
+.bulleted.small,.numbered.small{font-size:.88rem;line-height:1.85}
+.bulleted li,.numbered li{margin-bottom:.3rem}
+
+.callout{background:var(--paper-2);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin:1.6rem 0}
+.callout.warn{background:var(--warn-bg);border-left-color:var(--warn)}
+.callout.good{background:var(--good-bg);border-left-color:var(--good)}
+.callout__label{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.5rem;font-weight:600}
+.callout p{margin:0 0 .4rem;font-size:.92rem;line-height:1.9}
+.callout p:last-child{margin-bottom:0}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin:1.6rem 0}
+.grid2__item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.4rem 1.6rem}
+.grid2__item h4{font-family:"Noto Serif JP",serif;font-size:1.05rem;margin:0 0 .8rem}
+.grid2__item p{font-size:.9rem;line-height:1.85;color:var(--ink-2);margin:0}
+
+.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin:1.6rem 0}
+.scope__col{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.6rem 1.6rem 1.4rem}
+.scope__head{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.scope__tag{display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:8px;background:var(--ink);color:var(--lime);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1rem}
+.scope__head h4{font-family:"Noto Serif JP",serif;font-size:1.15rem;margin:0}
+.scope__where{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-3);margin:0 0 .8rem;background:var(--paper-2);padding:.4rem .7rem;border-radius:6px}
+.scope__col p{font-size:.92rem;line-height:1.9;margin:0 0 .8rem}
+
+.dialog{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.4rem;margin:1.4rem 0}
+.dialog__line{padding:.8rem 1.2rem;margin-bottom:.6rem;border-radius:12px;font-size:.92rem;line-height:1.85;max-width:86%}
+.dialog__line.you{background:var(--ink);color:var(--paper);margin-left:auto;border-bottom-right-radius:4px}
+.dialog__line.ai{background:#fff;color:var(--ink-2);border:1px solid var(--line);margin-right:auto;border-bottom-left-radius:4px}
+.dialog__line:last-child{margin-bottom:0}
+
+.flowchart{display:flex;flex-wrap:wrap;align-items:stretch;gap:.6rem;margin:1.6rem 0;justify-content:center}
+.flowchart__node{flex:1 1 180px;max-width:220px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1rem;font-weight:600;font-size:.92rem;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow-sm)}
+.flowchart__node span{display:block;margin-top:.4rem;font-weight:400;font-size:.78rem;color:var(--ink-3)}
+.flowchart__arrow{align-self:center;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--accent);font-size:1.2rem}
+@media(max-width:720px){.flowchart{flex-direction:column}.flowchart__arrow{transform:rotate(90deg)}}
+
+.compare{width:100%;border-collapse:collapse;margin:1.6rem 0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.92rem}
+.compare th,.compare td{text-align:left;padding:.9rem 1.1rem;border-bottom:1px solid var(--line);vertical-align:top}
+.compare th{background:var(--paper-2);font-family:"Noto Serif JP",serif;font-weight:700;font-size:.95rem;color:var(--ink)}
+.compare tr:last-child td{border-bottom:none}
+.compare td:first-child{font-weight:600;color:var(--ink);width:24%;background:var(--paper)}
+.compare .good{color:var(--good);font-weight:700}
+.compare .meh{color:var(--ink-3)}
+@media(max-width:720px){.compare,.compare thead,.compare tbody,.compare th,.compare td,.compare tr{display:block}.compare th{display:none}.compare td{border-bottom:none;padding:.4rem 1rem}.compare td:first-child{background:var(--ink);color:var(--paper);width:auto;margin-top:.6rem;border-radius:6px 6px 0 0}.compare tr{border-bottom:1px solid var(--line);padding-bottom:.6rem;margin-bottom:.6rem}}
+
+.steps{counter-reset:step;margin:1.6rem 0}
+.step{counter-increment:step;background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.6rem 1.4rem 4.4rem;position:relative;margin-bottom:1rem;transition:transform .15s}
+.step:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.step:before{content:counter(step);position:absolute;left:1.1rem;top:1.2rem;width:2.4rem;height:2.4rem;background:var(--ink);color:var(--lime);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1.05rem}
+.step h4{font-family:"Noto Serif JP",serif;font-size:1.1rem;margin:0 0 .5rem;line-height:1.5}
+.step p{font-size:.92rem;line-height:1.9;color:var(--ink-2);margin:0 0 .4rem}
+.step .hint{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-3);background:var(--paper-2);padding:.5rem .8rem;border-radius:6px;margin-top:.6rem;display:block;white-space:pre-wrap}
+
+.manifesto{background:var(--ink);color:var(--paper);padding:3.4rem 2rem;margin:3rem 0;border-radius:18px;text-align:center;position:relative;overflow:hidden}
+.manifesto:before{content:"";position:absolute;top:-30%;left:-10%;width:60%;height:160%;background:radial-gradient(ellipse,rgba(244,201,93,.16) 0%,transparent 65%)}
+.manifesto:after{content:"";position:absolute;bottom:-30%;right:-10%;width:60%;height:160%;background:radial-gradient(ellipse,rgba(184,85,42,.22) 0%,transparent 65%)}
+.manifesto__quote{font-family:"Noto Serif JP",serif;font-size:clamp(1.3rem,2.8vw,1.9rem);line-height:1.7;font-weight:500;max-width:780px;margin:0 auto;position:relative}
+.manifesto__quote strong{color:var(--lime);font-weight:700}
+
+.roadmap{max-width:1100px;margin:0 auto;padding:5rem 2rem;border-top:1px solid var(--line)}
+.roadmap__hero{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);color:#fff;border-radius:18px;padding:3rem 2.4rem;margin-bottom:3rem;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.roadmap__hero:after{content:"30";position:absolute;right:1.5rem;bottom:-3.2rem;font-family:"Noto Serif JP",serif;font-weight:900;font-size:14rem;color:rgba(255,255,255,.12);line-height:1;letter-spacing:-.05em}
+.roadmap__tag{font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.22em;color:rgba(255,255,255,.85);margin-bottom:1rem}
+.roadmap__title{font-family:"Noto Serif JP",serif;font-weight:900;font-size:clamp(1.6rem,3.4vw,2.4rem);margin:0 0 1rem;line-height:1.4;position:relative}
+.roadmap__lead{font-size:.98rem;line-height:1.9;color:rgba(255,255,255,.92);margin:0;max-width:720px;position:relative}
+.week{margin-bottom:2.4rem;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+.week__head{background:var(--ink);color:var(--paper);padding:1.4rem 1.8rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.week__no{font-family:"JetBrains Mono",monospace;font-size:.82rem;letter-spacing:.25em;color:var(--lime);font-weight:600}
+.week__title{font-family:"Noto Serif JP",serif;font-size:1.25rem;font-weight:700;margin:0}
+.week__sub{font-size:.82rem;color:rgba(250,250,247,.7);margin-left:auto}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;padding:0;list-style:none;margin:0}
+.day{padding:1.3rem 1.4rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;transition:background .15s}
+.day:hover{background:var(--paper-2)}
+.day__no{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:var(--accent);letter-spacing:.18em;font-weight:700;margin-bottom:.4rem}
+.day__title{font-family:"Noto Serif JP",serif;font-size:1rem;font-weight:700;margin:0 0 .5rem;color:var(--ink);line-height:1.5}
+.day__body{font-size:.86rem;line-height:1.8;color:var(--ink-2);margin:0}
+.day__time{font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--ink-3);margin-top:.6rem;display:inline-block;background:var(--paper-2);padding:.15rem .5rem;border-radius:4px}
+.day.checkpoint{background:linear-gradient(135deg,var(--paper-2) 0%,#fff 100%)}
+.day.checkpoint .day__no{color:var(--good)}
+
+.future{max-width:1100px;margin:0 auto;padding:5rem 2rem;border-top:1px solid var(--line)}
+.visionCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin:2rem 0}
+.visionCard{background:linear-gradient(135deg,var(--paper-2) 0%,#fff 100%);border:1px solid var(--line);border-radius:14px;padding:2rem 1.6rem 1.6rem;position:relative;overflow:hidden;transition:transform .2s}
+.visionCard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.visionCard__icon{font-family:"Noto Serif JP",serif;font-weight:900;font-size:2.6rem;color:var(--accent);opacity:.22;position:absolute;top:.4rem;right:1rem;letter-spacing:-.05em}
+.visionCard h4{font-family:"Noto Serif JP",serif;font-size:1.15rem;margin:0 0 .9rem;position:relative;line-height:1.5}
+.visionCard p{font-size:.92rem;line-height:1.9;color:var(--ink-2);margin:0 0 .8rem}
+.visionCard ul{margin:0;padding-left:1.1rem;font-size:.86rem;line-height:1.85;color:var(--ink-2)}
+
+.resources{max-width:1100px;margin:0 auto;padding:5rem 2rem 4rem;border-top:1px solid var(--line)}
+.resBlock{margin-bottom:3rem}
+.resBlock h3{font-family:"Noto Serif JP",serif;font-size:1.3rem;font-weight:700;margin:0 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+.terms{display:grid;grid-template-columns:minmax(140px,max-content) 1fr;gap:.8rem 1.6rem;font-size:.94rem}
+.terms dt{font-weight:700;color:var(--ink);background:var(--paper-2);padding:.3rem .7rem;border-radius:6px;font-family:"JetBrains Mono",monospace;font-size:.84rem;align-self:start}
+.terms dd{margin:0;color:var(--ink-2);line-height:1.85}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{padding:.7rem 1rem .7rem 2.4rem;position:relative;border-bottom:1px dashed var(--line);font-size:.94rem;color:var(--ink-2);line-height:1.8}
+.checklist li:before{content:"□";position:absolute;left:.8rem;top:.65rem;color:var(--accent);font-weight:700;font-size:1.1rem}
+
+.faq{max-width:1100px;margin:0 auto;padding:5rem 2rem 4rem;border-top:1px solid var(--line)}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:.8rem;padding:0;overflow:hidden;transition:box-shadow .2s}
+.faq details[open]{box-shadow:var(--shadow-md)}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 1.4rem;font-weight:600;font-size:.96rem;display:flex;align-items:center;gap:.8rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:before{content:"+";font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--accent);font-size:1.2rem;transition:transform .2s}
+.faq details[open] summary:before{content:"−"}
+.faq summary:hover{color:var(--accent)}
+.faq details .body{padding:0 1.4rem 1.4rem 2.6rem;font-size:.92rem;line-height:1.9;color:var(--ink-2)}
+.faq details .body p{margin:0 0 .7rem}
+.faq details .body p:last-child{margin-bottom:0}
+
+.footer{background:var(--ink);color:rgba(250,250,247,.7);margin-top:5rem;padding:3rem 2rem}
+.footer__inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem}
+.footer__logo{font-family:"Noto Serif JP",serif;font-weight:900;font-size:1.3rem;color:var(--paper);letter-spacing:.05em}
+.footer__sub{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.2em;color:var(--lime);margin-top:.3rem}
+.footer__meta{font-size:.82rem;line-height:1.9;text-align:right}
+.footer__meta p{margin:0}
+.footer__copy{margin-top:.8rem!important;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.12em}
+@media(max-width:720px){.footer__meta{text-align:left}}
+</style>
+</head>
+<body>
+
+<!-- ===== GATE ===== -->
+<div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate__inner">
+    <div class="gate__brand">
+      <span class="gate__brandMark">T-Lab</span>
+      <span class="gate__brandSub">Claude Lab</span>
+    </div>
+    <h1 id="gate-title" class="gate__title">受講生限定サイト</h1>
+    <p class="gate__lead">講座でお伝えした合言葉を入力してください。</p>
+    <form id="gate-form" class="gate__form" autocomplete="off">
+      <input id="gate-input" type="password" placeholder="合言葉" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="合言葉">
+      <button type="submit">入る</button>
+    </form>
+    <div id="gate-error" class="gate__error" role="alert" aria-live="polite"></div>
+    <div class="gate__small">T-LAB FOR ELEMENTARY TEACHERS</div>
+  </div>
+</div>
+
+<!-- ===== MAIN SITE ===== -->
+<div id="site" class="site">
+
+<!-- HEADER -->
+<header class="topbar">
+  <a class="topbar__logo" href="#home">
+    <span class="topbar__logoMark">T-Lab</span>
+    <span class="topbar__logoSub">Claude Lab</span>
+  </a>
+  <nav class="topbar__nav">
+    <a href="#stage-01"><span>01</span>入門</a>
+    <a href="#stage-02"><span>02</span>基本</a>
+    <a href="#stage-03"><span>03</span>発展</a>
+    <a href="#roadmap"><span>30</span>30日</a>
+    <a href="#future"><span>∞</span>展望</a>
+    <a href="#resources"><span>R</span>資料</a>
+    <a href="#faq"><span>?</span>FAQ</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero__tag">For Elementary School Teachers / Claude Starter to Master</div>
+  <h1 class="hero__title">
+    Claudeと、<br/>
+    <span class="hero__accent">同僚のように</span><br/>
+    仕事をする30日。
+  </h1>
+  <p class="hero__lead">
+    Claude は、Anthropic が開発した「<strong>長く考え、慎重に答える</strong>」AIです。<br/>
+    通知表の所見、学級通信、単元計画、ワークシート、GASスクリプト――<br/>
+    先生の仕事のほとんどに、Claudeはそっと並走できます。<br/>
+    このガイドは、Claudeを「触ったことがある」から「<strong>毎日の相棒にしている</strong>」へ。<br/>
+    3STAGE と 30日ロードマップで、現役教員のあなたを Claudeマスターまで連れていく実践書です。
+  </p>
+  <div class="hero__metaRow">
+    <div class="hero__meta"><span>対象</span>小学校教員（学年・経験不問）</div>
+    <div class="hero__meta"><span>所要</span>3STAGE / 30日プラン</div>
+    <div class="hero__meta"><span>前提</span>AI初心者OK・PC1台</div>
+    <div class="hero__meta"><span>到達</span>Cursor×Claude Code 運用</div>
+  </div>
+  <a href="#stage-01" class="hero__cta"><span>START</span>STAGE 01 から始める →</a>
+  <div class="hero__scrollHint">↓ または下の「教職の1日が変わる」から眺めてみてください</div>
+</section>
+
+<!-- WHAT YOU CAN DO -->
+<section class="what">
+  <div class="section__head">
+    <span class="section__num">00</span>
+    <h2 class="section__title">このガイドで身につくこと</h2>
+  </div>
+  <p class="section__lead">3つのSTAGEを順に踏むと、Claudeとの付き合い方が「単発の質問相手」から「毎日の同僚」へと変わります。最終的には、Cursorの中のターミナルで Claude Code を呼び出し、ファイル操作までAIに任せられるようになります。</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card__num">A</div>
+      <h3>Claudeの「強み」を見極められる</h3>
+      <p>ChatGPT・Gemini・Genspark・Copilot との違いを理解し、長文読解・慎重な応答・コード生成といった「Claudeにこそ頼るべき場面」が一瞬で見分けられるようになります。</p>
+    </div>
+    <div class="card">
+      <div class="card__num">B</div>
+      <h3>Cowork &amp; Design で実務を回せる</h3>
+      <p>Projects に資料を持たせて「同僚化」、Artifacts で学級通信・スライド・HTMLレイアウトを対話だけで仕上げる。チャット画面が「制作スタジオ」に変わります。</p>
+    </div>
+    <div class="card">
+      <div class="card__num">C</div>
+      <h3>Cursor×Claude Code を使いこなせる</h3>
+      <p>Cursor の中の統合ターミナルで Claude Code を呼び出す運用を身につけ、所見・通知表・通信・GAS自動化を「自分の言葉で頼んで終わり」の世界に変えていきます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ba">
+  <div class="section__head">
+    <span class="section__num">0X</span>
+    <h2 class="section__title">教職の1日が、こう変わる</h2>
+  </div>
+  <p class="section__lead">「便利になる」のではなく、「<strong>同じ24時間で、できることが増える</strong>」。これがClaudeを業務に入れる本当の意味です。3カ月後のあなたを想像してみてください。</p>
+
+  <div class="ba__grid">
+    <div class="ba__col before">
+      <div class="ba__label">BEFORE — Claudeを入れる前</div>
+      <h4>放課後、職員室で19時。<br/>所見の下書きはまだ8人分しか進んでいない。</h4>
+      <ul>
+        <li>所見は <strong>1人45分×35人 ≈ 26時間</strong>。毎学期の壁。</li>
+        <li>学級通信は1枚に <strong>2時間</strong>。週1ペースが限界。</li>
+        <li>単元計画は <strong>1単元3時間</strong>。前年のファイルを開いて切り貼り。</li>
+        <li>校内研究の冊子を読む時間がなく、付箋を貼ったまま積み上がる。</li>
+        <li>「子どもと話す時間より、書類と話す時間の方が長い」と感じている。</li>
+        <li>新しいツールを試す気力がない。今あるもので回すしかない。</li>
+      </ul>
+    </div>
+    <div class="ba__col after">
+      <div class="ba__label">AFTER — 30日後のあなた</div>
+      <h4>17時には退勤、夕飯の支度に間に合う。<br/>所見はすでに自分の文体で下書き済み。</h4>
+      <ul>
+        <li>所見は <strong>1人5分×35人 ≈ 3時間</strong>。Skillが自分の言い回しを覚えている。</li>
+        <li>学級通信は <strong>20分</strong>。Artifactsでひな型を出して微調整するだけ。</li>
+        <li>単元計画は <strong>30分</strong>。教科書PDFを読んだClaudeが全時を提案。</li>
+        <li>校内研究の冊子はProjectsに丸ごと放り込み、いつでも質問できる。</li>
+        <li>放課後、<strong>子どもと話す時間</strong>と、明日の授業の準備に集中できる。</li>
+        <li>新しいツールも「Claudeに聞きながら」覚えられる。学びが止まらない。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="manifesto">
+    <p class="manifesto__quote">
+      Claude は <strong>あなたの時間を奪う道具</strong> ではなく、<br/>
+      <strong>あなたの時間を返してくれる同僚</strong> です。<br/>
+      返ってきた時間を、何に使うか――そこから、教職の質が変わります。
+    </p>
+  </div>
+</section>
+
+<!-- ===== STAGE 01 ===== -->
+<section id="stage-01" class="stage">
+  <div class="stage__cover">
+    <div class="stage__num">STAGE 01 — 入門</div>
+    <h2 class="stage__title">Claudeの正体と、教職での可能性を掴む</h2>
+    <p class="stage__lead">まずは「Claudeって何者？」「ほかのAIと何が違うの？」「先生の仕事のどこに効くの？」を、丁寧にすっきりさせます。ここを押さえると、あとで「どの場面でClaudeを呼ぶか」の判断が一瞬で決まるようになります。</p>
+    <ul class="stage__toc">
+      <li><a href="#s1-1">1-1. Claudeとは何者か（Anthropicの哲学）</a></li>
+      <li><a href="#s1-2">1-2. Claudeの6つの強み</a></li>
+      <li><a href="#s1-3">1-3. 教職で「できること」が増える9シーン</a></li>
+      <li><a href="#s1-4">1-4. 他のAIとの徹底比較と使い分け</a></li>
+      <li><a href="#s1-5">1-5. プラン・料金・環境準備</a></li>
+    </ul>
+  </div>
+
+  <article id="s1-1" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">1-1</span>
+      <h3>Claudeとは何者か（Anthropicの哲学）</h3>
+    </div>
+    <p>Claude（クロード）は、米国 <strong>Anthropic</strong> 社が開発した対話型AIです。ChatGPTやGeminiと同じく「人の言葉で話しかけ、人の言葉で返ってくる」道具ですが、設計思想に大きな違いがあります。Anthropicは元 OpenAI の研究者たちが「<strong>もっと安全に、もっと正直に答えるAIを作る</strong>」と掲げて設立した会社で、Claudeはその看板モデルです。</p>
+    <p>具体的な性格づけとして、Anthropic は「<strong>Constitutional AI（憲法に沿って動くAI）</strong>」というアプローチを採用しています。AIに「やってはいけないこと」「守るべき価値観」を明文化したルールを与えたうえで学習させる、という発想です。結果として Claude は――</p>
+    <ul class="bulleted">
+      <li><strong>勝手に走らない</strong>：指示が曖昧だと、まず確認を返す</li>
+      <li><strong>知らないことは「分からない」と言える</strong>：作話（ハルシネーション）が少なめ</li>
+      <li><strong>長文を最後まで読む</strong>：途中で要約せず、終盤の細部まで参照する</li>
+      <li><strong>倫理的に怪しい指示には慎重</strong>：個人情報を含む内容では特に</li>
+    </ul>
+    <p>といった、「<strong>慎重でまじめな同僚</strong>」のような挙動を見せます。先生の仕事は「やり直しが利かない・人を扱う」ものが多いため、この慎重さは大きな安心材料になります。</p>
+    <div class="callout">
+      <div class="callout__label">先生にとっての立ち位置</div>
+      <p>Claudeは「優秀で、慎重で、長い文章をきちんと読んでくれる同僚」のような存在です。早口で答えるのではなく、まず文脈を読み、必要なら確認を返し、それから動く――そんなペース感のAI。所見・通知表・要録など、<strong>「ミスれない」仕事ほど Claude が向いています</strong>。</p>
+    </div>
+    <p>本講座で扱う Claude には、大きく分けて3つの入り口があります。それぞれ別物ではなく、<strong>1つのアカウントで全部使える</strong>と考えてOKです。</p>
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>① Claude.ai（チャット版）</h4>
+        <p>ブラウザで開く、いちばん基本の窓口。Projects・Artifacts などの機能はここに乗っている。STAGE 02 の主役。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>② Claude Code（CLI・IDE版）</h4>
+        <p>ターミナルや Cursor のようなエディタの中に住む Claude。ファイル操作・自動化・コード生成が得意。STAGE 03 の主役。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ Claude API（呼び出し版）</h4>
+        <p>自作のアプリやGoogle Apps Scriptから Claude を呼び出す入り口。今回は触りだけ。Pro契約とは別料金。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ Claude モバイル版</h4>
+        <p>スマホアプリ。通勤中・会議の合間に「ちょっと聞く」のに便利。本講座では補助的に扱います。</p>
+      </div>
+    </div>
+  </article>
+
+  <article id="s1-2" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">1-2</span>
+      <h3>Claudeの6つの強み</h3>
+    </div>
+    <p>Claudeには他のAIにはない特徴があります。ここでは「<strong>先生の仕事に直結する</strong>」観点で6つ取り上げます。読み終わったら、ご自身の業務のどれに当てはまるか、頭の中でチェックしてみてください。</p>
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>① 長文を「最後まで」読む</h4>
+        <p>20万字超（小説1冊ぶん）の資料を渡しても、最後の段落の細かい言い回しまで覚えています。学習指導要領・要録の手引き・校内研究の冊子をまるごと渡せるのはClaudeの大きな武器です。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>② 迷ったら「聞き返す」</h4>
+        <p>指示が曖昧なとき、勝手に走らず確認してくる頻度が高い。所見・通知表など「やり直しが利かない仕事」で安心して使えます。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ 文章とコードを両方こなす</h4>
+        <p>学級通信のような文章も、GASスクリプトのようなコードも、同じ精度で扱えます。「教員の仕事は文章8割／自動化2割」の両方を1つのAIでカバーできます。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ 安全側に寄せる設計</h4>
+        <p>個人情報や倫理的にきわどい指示には慎重に答えます。児童に関する情報を扱う場面では、この保守性が逆に頼りになります。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑤ デザイン物の生成が強い</h4>
+        <p>HTML/CSS の知識をフル活用して、学級通信・ポスター・スライド・インタラクティブ教材を「作れる」AI。Artifactsでその場でプレビューできるのもClaudeの専売特許です。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑥ 日本語が自然</h4>
+        <p>「ですます調」「である調」「やわらかい語り口」「保護者向けの丁寧さ」など、日本語のレジスター（場面の使い分け）が非常に得意。所見・通信の文体調整がほぼ一発で決まります。</p>
+      </div>
+    </div>
+    <div class="callout good">
+      <div class="callout__label">合言葉</div>
+      <p>「<strong>長い・難しい・間違えたくない・書類仕事</strong>」――この4つのどれかに当てはまる仕事は、まずClaudeに任せて損はありません。逆に「短いラフなアイデア出し」だけならChatGPTの方が軽快だったりします。</p>
+    </div>
+  </article>
+
+  <article id="s1-3" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">1-3</span>
+      <h3>教職で「できること」が増える9シーン</h3>
+    </div>
+    <p>抽象論より、具体例で見たほうが早いです。Claudeを業務に入れることで「<strong>できるようになる仕事</strong>」を9つ並べます。ここで挙げているのは「ラクになる」ではなく「<strong>これまで時間がなくて諦めていたことに手が届く</strong>」シーンです。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>① 35人分の所見を、自分の文体で</h4>
+        <p>観点メモを箇条書きで渡すだけで、自分の言い回しを学んだClaudeが下書きを返す。1人5分。読み返して微修正だけで仕上がります。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>② 学級通信を、週1から週2へ</h4>
+        <p>Artifactsで5分で下書きが出る。写真スペース・保護者欄・行事予告も型に。子どもの活躍を伝える頻度が上がる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ 単元計画を「全時」設計</h4>
+        <p>教科書PDFと指導要領をProjectsに入れ、単元名を渡すだけ。導入→展開→まとめの全時案、中心発問、振り返り問いが揃う。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ レベル別ワークシートを3パターン</h4>
+        <p>「易・標準・発展」を一気に出力。特別支援学級や個別最適に対応した教材展開が現実的になる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑤ 個別の教育支援計画の更新</h4>
+        <p>前年度の記録を読み込み、本年度の構成と用語を引き継いだ下書きを生成。空欄の0から書き始めなくて済む。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑥ 校内研究の論文・冊子をいつでも質問</h4>
+        <p>200ページの冊子をProjectsに入れておけば、「あの引用、どこに書いてあった？」が秒で出る。職員室の本棚が頭の中に入る。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑦ 保護者対応の下書き</h4>
+        <p>「保護者から〇〇の連絡があった。お返しのメールを丁寧に」と頼むだけ。トーン調整・誤解を生まない言い回しが得意。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑧ 時数管理・出欠集計の自動化</h4>
+        <p>Claude Code に頼めば、Google Apps Script を書いてくれる。スプレッドシートに毎日入力するだけの集計運用が完成。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>⑨ 行事のスライド・ポスター</h4>
+        <p>運動会・学習発表会・PTA行事のスライドや掲示物が、対話だけでHTMLで生成できる。デザインソフト不要。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout__label">大事な視点</div>
+      <p>これらは「<strong>サボる</strong>」ためではありません。Claudeに下書きを任せて空いた時間で、<strong>子どもを観察する</strong>・<strong>授業を磨く</strong>・<strong>同僚と話す</strong>・<strong>休む</strong>。教員という仕事の本丸に、時間が戻ってきます。</p>
+    </div>
+  </article>
+
+  <article id="s1-4" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">1-4</span>
+      <h3>他のAIとの徹底比較と使い分け</h3>
+    </div>
+    <p>T-Lab で扱う他のツールとの違いを、先生の実務目線で並べます。「どれが一番」ではなく「<strong>どの場面で何を呼ぶか</strong>」が大事です。Claudeを「メイン」に据えつつ、ChatGPTやGeminiを「副業」として使うイメージで読んでください。</p>
+
+    <table class="compare">
+      <thead>
+        <tr><th>項目</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Genspark</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-th="項目">長文読解</td>
+          <td data-th="Claude" class="good">◎ 20万字級OK</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◎ 100万トークン</td>
+          <td data-th="Genspark" class="meh">△</td>
+        </tr>
+        <tr>
+          <td data-th="項目">日本語の文体</td>
+          <td data-th="Claude" class="good">◎ 抜群に自然</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark">◯</td>
+        </tr>
+        <tr>
+          <td data-th="項目">コード生成</td>
+          <td data-th="Claude" class="good">◎ 業界標準</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark" class="meh">△</td>
+        </tr>
+        <tr>
+          <td data-th="項目">画像生成</td>
+          <td data-th="Claude" class="meh">△ 非対応</td>
+          <td data-th="ChatGPT" class="good">◎</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark">◯</td>
+        </tr>
+        <tr>
+          <td data-th="項目">スライド作成</td>
+          <td data-th="Claude">◯ HTML経由</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark" class="good">◎ 専用機能</td>
+        </tr>
+        <tr>
+          <td data-th="項目">Google連携</td>
+          <td data-th="Claude" class="meh">△</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini" class="good">◎ 純正</td>
+          <td data-th="Genspark">◯</td>
+        </tr>
+        <tr>
+          <td data-th="項目">調査・ファクト</td>
+          <td data-th="Claude">◯ 慎重</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark" class="good">◎ エージェント</td>
+        </tr>
+        <tr>
+          <td data-th="項目">ファイル操作</td>
+          <td data-th="Claude" class="good">◎ Claude Code</td>
+          <td data-th="ChatGPT" class="meh">△</td>
+          <td data-th="Gemini" class="meh">△</td>
+          <td data-th="Genspark" class="meh">△</td>
+        </tr>
+        <tr>
+          <td data-th="項目">安全性・慎重さ</td>
+          <td data-th="Claude" class="good">◎ 設計思想</td>
+          <td data-th="ChatGPT">◯</td>
+          <td data-th="Gemini">◯</td>
+          <td data-th="Genspark">◯</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>表だけ見ると「Claude強いな」と感じるかもしれませんが、実務での使い分けはこうなります。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>Claude を呼ぶとき</h4>
+        <p>所見・通知表・学級通信・単元計画・指導案・GAS・要録――<strong>「言葉を扱う本丸」</strong>と<strong>「ファイル操作の自動化」</strong>。本講座のメイン。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>ChatGPT を呼ぶとき</h4>
+        <p>イラスト・キャラクター画像が必要なとき。雑談的なアイデア発散。GPTsの専用ツール。子どもの興味を引く視覚要素を作る場面。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Gemini を呼ぶとき</h4>
+        <p>Googleドライブの中身を直接読ませたい。Workspace（Docs・Slides・Sheets）に組み込んで使いたい。最新ニュースを検索したい。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Genspark を呼ぶとき</h4>
+        <p>校内研究の発表スライドを「ファクト調べ＋見栄えのいい資料」までまとめて欲しい。統計や事例の調べものに強い。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout__label">本講座のスタンス</div>
+      <p>本ガイドでは Claude を <strong>メインAI</strong> として位置づけます。理由は3つ。①日本の学校文書（所見・通信・指導案）との相性が抜群、②Cursor×Claude Code でファイル業務まで仕組み化できる、③Skill構築で「自分の型」を残せる。他のAIは「補完的に併用」する形でOKです。</p>
+    </div>
+  </article>
+
+  <article id="s1-5" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">1-5</span>
+      <h3>プラン・料金・環境準備</h3>
+    </div>
+    <p>Claude を使い始めるための準備は驚くほど簡単です。ここはチェックリスト形式で進めます。</p>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">プラン選び（個人の先生向け）</h4>
+    <table class="compare">
+      <thead>
+        <tr><th>プラン</th><th>料金（月額）</th><th>できること</th><th>本講座での推奨</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-th="プラン">Free</td>
+          <td data-th="料金">¥0</td>
+          <td data-th="できること">短いチャット・1日数回まで・上位モデル非対応</td>
+          <td data-th="推奨" class="meh">△ お試し用</td>
+        </tr>
+        <tr>
+          <td data-th="プラン">Pro</td>
+          <td data-th="料金">約 $20 / 月（年払いだと $17）</td>
+          <td data-th="できること">Projects・Artifacts フル機能・Claude Code利用可・上位モデルOK</td>
+          <td data-th="推奨" class="good">◎ 標準ライン</td>
+        </tr>
+        <tr>
+          <td data-th="プラン">Max</td>
+          <td data-th="料金">$100〜$200 / 月</td>
+          <td data-th="できること">Pro の5〜20倍の利用上限・Claude Codeをガッツリ回す人向け</td>
+          <td data-th="推奨">◯ Skillを大量に作るなら</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout good">
+      <div class="callout__label">先生の標準セット</div>
+      <p>個人で導入するなら「<strong>Claude Pro（$20/月）＋ Cursor 無料版または Pro（$20/月）</strong>」。合計でだいたい <strong>月6,000円前後</strong>。日々の業務削減量を考えれば、十分にペイする投資ラインです。校内予算で導入するなら校長・情報担当と相談を。</p>
+    </div>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:2rem 0 .8rem">準備の5ステップ</h4>
+    <div class="steps">
+      <div class="step">
+        <h4>claude.ai にアクセス</h4>
+        <p>ブラウザで <code>claude.ai</code> を開きます。Googleアカウント等でサインアップできます。</p>
+        <span class="hint">学校配布アカウントを使う場合は、校内規程・情報セキュリティポリシーの確認を先に。判断に迷うときは管理職と情報担当へ。</span>
+      </div>
+      <div class="step">
+        <h4>プランを選ぶ</h4>
+        <p>無料版でも触れますが、Projects・大容量ファイル・上位モデルを使うには <strong>Pro プラン</strong>が現実的です。クレジットカードで月単位／年単位のどちらも選べます。</p>
+        <span class="hint">校務PCで使う場合は、自治体・学校で課金の可否ルールがあるので要確認。個人カードで契約して校外で使う、というスタイルも検討の余地あり。</span>
+      </div>
+      <div class="step">
+        <h4>表示言語を日本語に</h4>
+        <p>プロフィール／設定から表示言語を日本語にしておくとUIが読みやすくなります。応答は元から日本語で大丈夫です。</p>
+      </div>
+      <div class="step">
+        <h4>初回プロンプトで挙動を確認</h4>
+        <p>「あなたは小学校教員の補助役です。まずは自己紹介してください」と入れて、応答のトーンを見ておきます。返事の長さ・敬語の具合・絵文字の有無などをチェック。</p>
+        <span class="hint">気に入らなければ「もう少し砕けた言い方で」「絵文字なしで」と頼めばすぐ変わります。</span>
+      </div>
+      <div class="step">
+        <h4>Cursor のダウンロード（STAGE 03 用）</h4>
+        <p>STAGE 03 で使う <strong>Cursor</strong>（VS Code ベースのAI内蔵エディタ）を、<code>cursor.com</code> からダウンロードしておきます。インストールはあとでOK。まずは入れる場所だけ確保。</p>
+        <span class="hint">Cursor 自体は無料でも使えます。AI機能を本格的に使うなら Pro $20/月。Claude Code と組み合わせて使うので、Cursor の AI 自体は使わなくてもOK。</span>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout__label">個人情報の取り扱い（最重要）</div>
+      <p>児童氏名・住所・連絡先などの個人情報は、Claudeに限らず<strong>あらゆるAIに入力しないでください</strong>。仮名（A児・B児など）に置き換えるのが鉄則です。Claudeは安全設計が強いとはいえ、入力した情報は学習・評価のために事業者側で参照される可能性が残ります。<strong>「入れない」が最強の防御策</strong>です。</p>
+    </div>
+  </article>
+</section>
+
+<!-- ===== STAGE 02 ===== -->
+<section id="stage-02" class="stage">
+  <div class="stage__cover">
+    <div class="stage__num">STAGE 02 — 基本</div>
+    <h2 class="stage__title">Cowork &amp; Design で日常業務を加速</h2>
+    <p class="stage__lead">ここからは手を動かします。Claudeを「単発のチャット相手」から「資料を一緒に持ち、成果物を一緒に作る同僚」に格上げしていきます。キーワードは <strong>Cowork</strong>（協働）と <strong>Design</strong>（生成）です。このSTAGEを通すと、ブラウザ版Claude.aiだけで、所見・通信・スライドのほとんどが回せるようになります。</p>
+    <ul class="stage__toc">
+      <li><a href="#s2-1">2-1. Cowork①：Projectsで「資料を持たせる」</a></li>
+      <li><a href="#s2-2">2-2. Cowork②：Artifactsで「一緒に作る」</a></li>
+      <li><a href="#s2-3">2-3. Design①：学級通信を作るレシピ</a></li>
+      <li><a href="#s2-4">2-4. Design②：スライド・ポスター・掲示物</a></li>
+      <li><a href="#s2-5">2-5. プロンプト設計の型（4要素）</a></li>
+    </ul>
+  </div>
+
+  <article id="s2-1" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">2-1</span>
+      <h3>Cowork①：Projectsで「資料を持たせる」</h3>
+    </div>
+    <p><strong>Projects</strong> は、Claudeに「<strong>毎回読み直してほしい資料</strong>」と「<strong>毎回守ってほしいルール</strong>」をあらかじめ預けておく機能です。チャットを開くたびに資料を貼り直す手間が消え、Claudeが「あの単元の担当」「あの学級の担任の相棒」になっていきます。</p>
+
+    <div class="scope">
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">K</span>
+          <h4>Knowledge（持たせる資料）</h4>
+        </div>
+        <p class="scope__where">置けるもの：PDF・Word・テキスト・画像</p>
+        <p>学年の年間指導計画、学級経営案、教科書PDF、校内研究の冊子、校務分掌資料など。<strong>毎回参照したい背景情報</strong>を放り込みます。容量制限はProプランで十分すぎるレベル。</p>
+      </div>
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">I</span>
+          <h4>Instructions（守らせるルール）</h4>
+        </div>
+        <p class="scope__where">置けるもの：自由記述の指示文</p>
+        <p>「ですます調で」「個人名は出さない」「3文以内で」「最後に振り返り用の問いを1つ添える」など、<strong>毎回守ってほしい型</strong>を文章で書きます。1000字程度でも問題なく機能します。</p>
+      </div>
+    </div>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">Projects を作る5ステップ</h4>
+    <div class="steps">
+      <div class="step">
+        <h4>左サイドバーから「Projects」を開く</h4>
+        <p>Claude.ai の左メニューに「Projects」があります。「+ New Project」をクリック。</p>
+      </div>
+      <div class="step">
+        <h4>名前と説明をつける</h4>
+        <p>例：「5年算数 単元計画」「3組 学級通信」「個別の支援計画 担当児」。説明欄には「このProjectで何をするか」を1〜2文で書きます。</p>
+      </div>
+      <div class="step">
+        <h4>Knowledge にファイルを追加</h4>
+        <p>教科書PDF、指導要領該当部分、年間指導計画、前年度の通信、自分の所見の見本ファイルなど。「<strong>毎回読み返してほしいもの</strong>」を厳選して入れます。多すぎると逆に精度が落ちるので、5〜10ファイル程度が目安。</p>
+        <span class="hint">児童名や個人情報を含むファイルは絶対に入れない。仮名化したコピーを別途用意してから入れる。</span>
+      </div>
+      <div class="step">
+        <h4>Instructions に「守らせるルール」を書く</h4>
+        <p>文体・字数・避けたい表現・最終形のイメージなどを文章で。「<strong>ですます調・3文以内・否定形を使わない・最後に保護者への一言</strong>」のように具体的に。</p>
+      </div>
+      <div class="step">
+        <h4>新規チャットを開いて試運転</h4>
+        <p>Project内で新規チャットを開き、いつもの依頼を投げてみる。応答がInstructionsに沿っているかを確認。ズレていたらInstructionsを直して再試行。最初の数回は「<strong>Instructionsの調整</strong>」が中心の作業になります。</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <div class="callout__label">最初に作るべき Project 5選</div>
+      <p>① <strong>学級経営Project</strong>（年間目標・児童像・学級ルール）<br/>
+      ② <strong>通知表Project</strong>（観点メモ→所見化）<br/>
+      ③ <strong>学級通信Project</strong>（過去の通信を読ませて文体を継承）<br/>
+      ④ <strong>単元計画Project</strong>（教科×学年・教科書PDFと指導要領）<br/>
+      ⑤ <strong>個別支援Project</strong>（仮名化した支援計画の型・配慮事項）</p>
+    </div>
+
+    <p>Instructions の書き方が一番のキモです。下に教員向けのサンプルを置いておきます。コピペして自分流に調整してみてください。</p>
+
+    <pre><code>【役割】
+あなたは小学校5年担任の補助役です。
+丁寧で、慎重で、子どもと保護者の両方に配慮できる同僚として動いてください。
+
+【出力ルール（全チャット共通）】
+- 文体：ですます調
+- 個人名・住所・連絡先は絶対に書かない（仮名はA児・B児で受ける）
+- 否定形・断定的な評価は避ける
+- 「がんばる」「努力する」は所見では使わない
+- 不明点があれば、勝手に補完せず必ず質問する
+
+【参照優先度】
+1. Knowledge にある学年指導計画
+2. Knowledge にある学校の文書フォーマット
+3. それ以外は一般的な小学校教育の文脈で判断
+
+【出力の最後に】
+- 「確認したい点」があれば箇条書きで添える</code></pre>
+  </article>
+
+  <article id="s2-2" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">2-2</span>
+      <h3>Cowork②：Artifactsで「一緒に作る」</h3>
+    </div>
+    <p><strong>Artifacts</strong> は、Claudeの返事のうち「成果物」と呼べる部分を、チャット画面の右側に専用の作業エリアとして開いてくれる機能です。テキスト・コード・HTML・スライド構成案など、生成物がその場でプレビュー＆編集できる「<strong>制作キャンバス</strong>」になります。</p>
+
+    <div class="flowchart">
+      <div class="flowchart__node">下書きを依頼<br/><span>「学級通信のひな型作って」</span></div>
+      <div class="flowchart__arrow">→</div>
+      <div class="flowchart__node">Artifactsに出力<br/><span>右側に成果物が表示</span></div>
+      <div class="flowchart__arrow">→</div>
+      <div class="flowchart__node">部分修正を依頼<br/><span>「冒頭をやわらかく」</span></div>
+      <div class="flowchart__arrow">→</div>
+      <div class="flowchart__node">完成版を保存<br/><span>コピーまたはダウンロード</span></div>
+    </div>
+
+    <p>大事なのは、<strong>「最初から完璧を狙わない」</strong>こと。Claudeに6割の下書きを出してもらい、「ここはやわらかく」「この段落は削って」「最後に保護者への一言を足して」と、対話で少しずつ完成形に近づけます。これが <strong>Cowork（協働）</strong> の感覚です。</p>
+
+    <div class="dialog">
+      <div class="dialog__line you">来週の学級通信のひな型を作って。テーマは「校外学習の振り返り」。A4一枚、見出し3つ、最後に保護者へのお願いを1段落。</div>
+      <div class="dialog__line ai">了解しました。下書きをArtifactsに出します。トーンは「ですます調・やわらかめ」で良いですか？ また、写真の差込位置を本文中に明示しておくのも便利です。</div>
+      <div class="dialog__line you">はい。写真は3カ所に目印を入れて。「学年集会の様子」「お弁当の時間」「帰りのバスでの一言」あたり。</div>
+      <div class="dialog__line ai">承知しました。それでは生成します。</div>
+    </div>
+
+    <div class="callout">
+      <div class="callout__label">Coworkの極意</div>
+      <p>Claudeに丸投げするのではなく、「<strong>判断は自分、清書はClaude</strong>」と分担を決めること。先生の仕事の「<strong>何を書くか</strong>」は人にしか決められませんが、「<strong>どう書くか</strong>」はClaudeが圧倒的に速いです。先生はディレクター、Claudeは熟練のライター・デザイナー、というポジション分担。</p>
+    </div>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">Artifactsで出せる成果物の種類</h4>
+    <ul class="bulleted">
+      <li><strong>テキスト</strong>：所見、通信本文、お便り、メール下書き、原稿</li>
+      <li><strong>Markdown</strong>：単元計画、指導案、研究授業の構想</li>
+      <li><strong>HTML</strong>：学級通信レイアウト、ポスター、スライド、インタラクティブ教材</li>
+      <li><strong>SVG画像</strong>：簡単な図解・板書のイメージ・座席表</li>
+      <li><strong>コード（JavaScript等）</strong>：簡易な算数ツール、フラッシュカード、計算問題ジェネレータ</li>
+      <li><strong>Mermaid図</strong>：単元の構造図、人物相関図、フローチャート</li>
+    </ul>
+  </article>
+
+  <article id="s2-3" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">2-3</span>
+      <h3>Design①：学級通信を作るレシピ</h3>
+    </div>
+    <p>具体例として、学級通信を1本作ってみましょう。下のプロンプトをそのままコピーして、自分の学級に合わせて差し替えて使えます。</p>
+
+    <pre><code>【依頼】
+A4一枚、横書き、学級通信のHTMLを作って。
+
+【学級】
+小学5年3組（仮）／担任：（自分の名前）
+
+【今回のテーマ】
+校外学習「江戸東京たてもの園」の振り返り
+
+【構成】
+1) タイトル＋号数（第○号）＋日付＋発行者
+2) 見出し1：「学びの場が変わると、見え方も変わる」
+   本文：当日の様子（学習班の動き、子どもの感想を2人ぶん）
+3) 見出し2：「子どもが見つけた『なぜ？』」
+   本文：実物に触れたことで生まれた問い、これからの学習に繋げる視点
+4) 見出し3：「ご家庭から、ぜひ一言を」
+   本文：振り返りカードへの保護者コメントのお願い
+5) フッター：次回行事の予告、保護者への一文
+
+【デザイン】
+- 暖色系（オレンジ・クリーム）／丸ゴシック／余白多め
+- 写真スペース3カ所（margin で枠を確保）
+- 印刷向けCSS（@media print 対応）
+- フォントは Noto Sans JP
+
+【ルール】
+- 児童の実名は使わない（A児・B児・C児）
+- 文体はですます調、やわらかめ
+- 1段落は3〜4文以内</code></pre>
+
+    <p>このプロンプトを Project内のチャットに貼れば、ArtifactsにHTMLが出力されます。プレビューを見ながら「<strong>もう少し色をやわらかく</strong>」「<strong>2つ目の見出しを別の表現に</strong>」と対話で詰めていきます。20分もあれば1枚仕上がります。</p>
+
+    <div class="callout">
+      <div class="callout__label">デザイン指示のコツ</div>
+      <p>「かわいい感じで」より、「<strong>暖色系（オレンジ・黄色）・丸ゴシック・余白多め・写真3枚分のスペース</strong>」のように、視覚要素を具体的な言葉に分解して渡します。Claudeはここまで明示するとほぼ一発で形にしてきます。HTMLとCSSの語彙（grid・flex・border-radius・shadow など）が分かれば指示の精度はさらに上がりますが、知らなくてもOK。</p>
+    </div>
+
+    <p>仕上がったHTMLは、Artifactsの右上にある「コピー」「ダウンロード」から保存。ローカルの <code>.html</code> ファイルとして開き、ブラウザで印刷すれば紙の通信になります。Wordや一太郎を経由する必要はありません。</p>
+  </article>
+
+  <article id="s2-4" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">2-4</span>
+      <h3>Design②：スライド・ポスター・掲示物</h3>
+    </div>
+    <p>Artifacts に HTML を吐かせると、その場でブラウザ表示されます。<strong>実際に動くスライドや、印刷できるレイアウト</strong>が、コードを書かずに手に入ります。先生の現場で効くのはこの4つです。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>授業スライド（HTML一枚物）</h4>
+        <p>矢印キーで進む、横スクロール型のスライド。導入→展開→まとめ。教室の電子黒板にそのまま投影。PowerPoint不要。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>行事ポスター</h4>
+        <p>運動会・学習発表会・PTA行事の案内デザイン。日時・場所・対象が大きく、画像枠が確保された印刷用レイアウト。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>掲示物</h4>
+        <p>給食目標・係活動・誕生日カードのテンプレ。色違い・サイズ違いを大量に展開できる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>インタラクティブ教材</h4>
+        <p>算数の図形パズル、漢字フラッシュカード、九九タイマー。JavaScript込みで動く教材を、対話で作れる。</p>
+      </div>
+    </div>
+
+    <pre><code>【プロンプト例：社会科の導入スライド】
+小学校5年の社会科「日本の工業」導入スライドを作って。
+構成：
+1) タイトル（青系・大きな見出し）
+2) 全国の工業地帯マップ（仮の枠でOK、後で画像を差し替える）
+3) 児童への問い「なぜここに工業が集まる？」
+4) 今日のめあて
+
+仕様：
+- HTML一枚で、矢印キーで進む形式
+- 各スライドは中央寄せ、フォントは大きめ
+- 黒板で見やすいよう、背景は白、文字は濃紺
+- フッターに「5年〇組／第○時」</code></pre>
+
+    <p>こうした指示で、その場で動くスライドが生成されます。出てきたHTMLは <code>.html</code> として保存すれば、職員室PCでもタブレットでも開けます。研究授業の準備時間が一気に短くなります。</p>
+
+    <div class="callout warn">
+      <div class="callout__label">校務PCで使うときの注意</div>
+      <p>校務PCで Claude を使う場合、自治体・学校で利用ルールが異なります。情報セキュリティポリシーを確認のうえ、許可された範囲で利用してください。判断に迷うときは、管理職と情報担当に相談を。生成だけは私物PCで行い、出力ファイルだけ校務PCに持ち込む、という運用も現実解の一つです。</p>
+    </div>
+  </article>
+
+  <article id="s2-5" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">2-5</span>
+      <h3>プロンプト設計の型（4要素）</h3>
+    </div>
+    <p>STAGE 02 の最後に、すべての依頼に共通する「<strong>プロンプトの型</strong>」を渡しておきます。この型を覚えると、思い通りの出力が一発で返ってくる確率が劇的に上がります。</p>
+
+    <pre><code>【役割】
+あなたは〇〇の補助役です。
+
+【入力】
+- これから渡す情報：（テーマ・データ・観点）
+
+【出力ルール】
+- 文体：（ですます調 / である調 / 砕けた口調）
+- 形式：（HTML / Markdown / プレーンテキスト）
+- 字数：（120字以内 / 3文以内 / A4一枚）
+- 避ける表現：（否定形 / 断定的な評価 / カタカナ語）
+
+【手順】
+1. 入力から事実を抜き出す
+2. 観点に紐付けて整理する
+3. 上のルールに従って文章化する
+
+【最後に】
+- 確認したい点があれば箇条書きで添える</code></pre>
+
+    <p>4つのブロック（役割／入力／出力ルール／手順）を埋めれば、それだけでプロンプトとして十分機能します。所見も通信も単元計画も、この型から派生で書けます。</p>
+
+    <div class="callout good">
+      <div class="callout__label">よくある失敗とその直し方</div>
+      <p>① <strong>出力が長すぎる</strong> → 「120字以内」と字数を明記<br/>
+      ② <strong>同じ言い回しが多い</strong> → 「同じ語尾を3回以上連続させない」<br/>
+      ③ <strong>子どもの実態に合わない</strong> → 「少人数・特別支援にも対応した補足を1段落つける」<br/>
+      ④ <strong>学校の慣例とズレる</strong> → 避けたい語をリスト化して Instructions に追加<br/>
+      ⑤ <strong>急に断定的になる</strong> → 「断定を避け、可能性として書く」と明記</p>
+    </div>
+  </article>
+</section>
+
+<!-- ===== STAGE 03 ===== -->
+<section id="stage-03" class="stage">
+  <div class="stage__cover">
+    <div class="stage__num">STAGE 03 — 発展</div>
+    <h2 class="stage__title">Cursor × Claude Code で教職を再構築する</h2>
+    <p class="stage__lead">ここまでは「ブラウザで対話する」段階。STAGE 03 は「<strong>PCの中に Claude を住まわせる</strong>」段階です。Cursor の中で Claude Code を動かすと、ファイルを直接読み書きしながら作業が進みます。来年も、再来年も使い回せる「<strong>自分専用の業務基盤</strong>」を作っていきましょう。</p>
+    <ul class="stage__toc">
+      <li><a href="#s3-1">3-1. なぜ Cursor × Claude Code なのか</a></li>
+      <li><a href="#s3-2">3-2. インストールと初回起動</a></li>
+      <li><a href="#s3-3">3-3. CLAUDE.md で自己紹介する</a></li>
+      <li><a href="#s3-4">3-4. Permission Mode の使い分け</a></li>
+      <li><a href="#s3-5">3-5. 校務での実践4連発</a></li>
+      <li><a href="#s3-6">3-6. Skill / Slash Commands / Hooks</a></li>
+      <li><a href="#s3-7">3-7. 学校・学年で共有する</a></li>
+    </ul>
+  </div>
+
+  <article id="s3-1" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-1</span>
+      <h3>なぜ Cursor × Claude Code なのか</h3>
+    </div>
+    <p><strong>Claude Code</strong> は、ターミナル（黒い画面）やコードエディタの中で動く Claude です。「ブラウザのチャット」と違って、<strong>自分のPCのファイルを直接読んだり書いたりできる</strong>のが最大の違いです。</p>
+
+    <p>本講座では、Claude Code を <strong>Cursor の統合ターミナルの中で動かす</strong> スタイルを推奨します。理由は一言で言うと、<strong>「全部見える」</strong>からです。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>① ファイル変更が「視覚的に」見える</h4>
+        <p>Claude Code がファイルを書き換えるたびに、Cursor のエディタ画面に <strong>差分（diff）</strong> がリアルタイム表示されます。ターミナルの文字列ではなく、色付きの差分ビューで「<strong>どこが、どう変わったか</strong>」が一瞬で分かる。怖くなくなります。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>② ファイルツリーが常に見える</h4>
+        <p>Cursor の左パネルに、フォルダ構成がいつも表示されます。Claude が新しいファイルを作ったり、別のフォルダを覗いたりすると、それがツリー上で点滅。「<strong>今、何が起きているか</strong>」を見失わずに済みます。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ ターミナルとエディタが一体</h4>
+        <p>下部のターミナルで Claude と対話しながら、上部のエディタで自分も編集できる。「<strong>AIに任せる部分</strong>」と「<strong>自分で書く部分</strong>」を、画面を切り替えずに往復できます。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ Permission Mode で安全装置が効く</h4>
+        <p>「<strong>計画だけ立てて、実行は手前で止まる</strong>」モードや、「<strong>編集は自動承認、実行コマンドだけ確認</strong>」モードを切り替えられます。初心者は安全側、慣れたら速度側へ。後述します。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout__label">他の選択肢との比較</div>
+      <p>VS Code でも JetBrains でも Antigravity でも Claude Code は動きます。Cursor を推す理由は「<strong>AI内蔵エディタとして設計されている</strong>」点。差分表示・選択範囲のAI連携・診断（エラー）の自動共有など、AI前提のUIが至る所にあり、Claude Code と相性が抜群です。Antigravityでアプリ開発の経験があるなら、Cursor は1日で慣れます。</p>
+    </div>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">「ブラウザ版 Claude」と「Cursor内 Claude Code」の使い分け</h4>
+    <table class="compare">
+      <thead>
+        <tr><th>場面</th><th>Claude.ai（ブラウザ）</th><th>Cursor × Claude Code</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-th="場面">所見1人ぶんの下書き</td>
+          <td data-th="ブラウザ" class="good">◎ 手早い</td>
+          <td data-th="Cursor">○ オーバースペック</td>
+        </tr>
+        <tr>
+          <td data-th="場面">35人ぶんを一括</td>
+          <td data-th="ブラウザ">△ コピペ地獄</td>
+          <td data-th="Cursor" class="good">◎ ファイル一括処理</td>
+        </tr>
+        <tr>
+          <td data-th="場面">学級通信1枚</td>
+          <td data-th="ブラウザ" class="good">◎ Artifactsで完結</td>
+          <td data-th="Cursor">○</td>
+        </tr>
+        <tr>
+          <td data-th="場面">月次の通信12号まとめ</td>
+          <td data-th="ブラウザ" class="meh">△</td>
+          <td data-th="Cursor" class="good">◎ Skillで自動化</td>
+        </tr>
+        <tr>
+          <td data-th="場面">単元計画の全時設計</td>
+          <td data-th="ブラウザ">○</td>
+          <td data-th="Cursor" class="good">◎ ファイル分割保存</td>
+        </tr>
+        <tr>
+          <td data-th="場面">GAS（Google Apps Script）</td>
+          <td data-th="ブラウザ" class="meh">△</td>
+          <td data-th="Cursor" class="good">◎ ファイル直編集</td>
+        </tr>
+        <tr>
+          <td data-th="場面">仕組み化・再利用</td>
+          <td data-th="ブラウザ" class="meh">△</td>
+          <td data-th="Cursor" class="good">◎ Skill / Hooks</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>ざっくり言うと、<strong>「1回だけの作業」はブラウザ</strong>、<strong>「繰り返す作業」「ファイル相手の作業」は Cursor</strong>、と使い分けます。両方を行き来しながら使うのが現実的です。</p>
+  </article>
+
+  <article id="s3-2" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-2</span>
+      <h3>インストールと初回起動</h3>
+    </div>
+    <p>ここは「<strong>素人にもわかる雰囲気で</strong>」順を追って進めます。Windows と Mac の両方で動きます。本ガイドの想定は Windows ですが、Mac の場合は併記しています。</p>
+
+    <div class="steps">
+      <div class="step">
+        <h4>Cursor をダウンロードしてインストール</h4>
+        <p>ブラウザで <code>cursor.com</code> を開き、「Download」をクリック。<br/>
+        Windows なら <code>.exe</code> インストーラ、Mac なら <code>.dmg</code> がダウンロードされます。指示に従ってインストール。</p>
+        <span class="hint">起動すると「VS Code の設定をインポートしますか？」と聞かれることがあります。VS Code を使っていた人は Yes、初めての人は Skip でOK。</span>
+      </div>
+
+      <div class="step">
+        <h4>作業用フォルダを1つ作る</h4>
+        <p>デスクトップやドキュメント配下に、たとえば <code>teacher-work</code> という空フォルダを作ります。今後、Claude Code との作業はここに置いていきます。<br/>
+        Cursor を開き、「File → Open Folder」からそのフォルダを選びます。</p>
+        <span class="hint">日本語名のフォルダでも動きますが、半角英数の方がトラブルが起きにくいです。</span>
+      </div>
+
+      <div class="step">
+        <h4>Claude Code をインストール</h4>
+        <p>Cursor の下部メニューから「Terminal」を開きます（または <strong>Ctrl + ` </strong> ※バッククォート）。<br/>
+        ターミナルが開いたら、下の1行を貼り付けて Enter。</p>
+        <span class="hint">【Windows / PowerShell】
+irm https://claude.ai/install.ps1 | iex
+
+【Mac / Linux】
+curl -fsSL https://claude.ai/install.sh | bash
+
+【WinGet（Windows）】
+winget install Anthropic.ClaudeCode
+
+【Homebrew（Mac）】
+brew install --cask claude-code</span>
+      </div>
+
+      <div class="step">
+        <h4>動作確認</h4>
+        <p>インストールが終わったら、ターミナルで <code>claude --version</code> と打ってみる。バージョン番号が出れば成功です。出ないときは <code>claude doctor</code> で診断できます。</p>
+        <span class="hint">Windows で「コマンドが見つからない」と出る場合は、ターミナルを一度閉じて開き直してから試す。それでもダメなら PCを再起動。</span>
+      </div>
+
+      <div class="step">
+        <h4>Claude Code を起動してログイン</h4>
+        <p>ターミナルで <code>claude</code> と打って Enter。初回はブラウザが開き、Claude にログインを求められます。<strong>Pro プランに加入済みのアカウント</strong>でログインしてください。<br/>
+        ※無料プランでは Claude Code は使えません。</p>
+        <span class="hint">ログインが終わるとターミナルに戻り、「&gt; 」のようなプロンプトが出ます。これが Claude Code の対話画面です。</span>
+      </div>
+
+      <div class="step">
+        <h4>初回のあいさつをする</h4>
+        <p>プロンプトに「<strong>あなたは小学校教員の補助役です。まずは自己紹介してください。</strong>」と打って Enter。Claudeが日本語で返事を返します。会話できれば準備完了です。</p>
+        <span class="hint">終了するときは <code>/exit</code> または Ctrl + C を2回。</span>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <div class="callout__label">ここまでで気づくこと</div>
+      <p>難しいことは何もしていません。1コマンド打って、ログインして、話しかけただけ。<strong>Claude Code はターミナルの中の「もう一人のあなた」</strong>です。これからは、その「もう一人」に仕事を頼んでいきます。</p>
+    </div>
+  </article>
+
+  <article id="s3-3" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-3</span>
+      <h3>CLAUDE.md で自己紹介する</h3>
+    </div>
+    <p>Claude Code を本格的に使い始める前に、必ずやってほしいことが1つあります。それが <strong>CLAUDE.md</strong>（クロード・ドット・エムディー）を置くことです。</p>
+    <p>CLAUDE.md は、作業フォルダの直下に置くテキストファイル。Claude Code はこのフォルダで動くとき、<strong>毎回最初にこのファイルを読みます</strong>。あなたの自己紹介・好み・ルールを書いておけば、毎回それを踏まえた応答をしてくれます。Projects の Instructions の Claude Code 版だと思ってください。</p>
+
+    <p>Cursor のエディタで <code>teacher-work</code> フォルダを開き、<strong>新規ファイル「CLAUDE.md」</strong>を作り、下のような内容を入れます。</p>
+
+    <pre><code># 私について
+- 役割: 小学校5年担任（特別支援学級兼任）
+- 受け持ち: 5年3組（30人）／支援学級（3人）
+- 校内分掌: 学年主任・情報担当
+- 興味: AI活用・授業づくり・GAS自動化
+
+# このフォルダで頼みたいこと
+- 学級通信・所見・単元計画・支援計画の下書き
+- ワークシート（HTML or PDF想定の印刷物）
+- Google Apps Script（時数管理・出欠集計）
+- 校内研究の冊子の要約・引用検索
+
+# 守ってほしいルール
+- 文体: ですます調（保護者向けは丁寧め）
+- 児童の実名は絶対に書かない（仮名はA児・B児で）
+- 否定形・断定的評価は避ける
+- 「がんばる」「努力する」は所見では使わない
+- 不明点があれば必ず質問する（勝手に補完しない）
+
+# よく使うファイルの場所
+- 所見メモ: ./shoken-memos/
+- 通信テンプレ: ./tsushin-templates/
+- 単元計画: ./units/
+- GAS: ./scripts/
+
+# 連携している外部資料
+- 学習指導要領（PDF）は ./docs/ 配下
+- 校内研究の冊子（PDF）も ./docs/ 配下</code></pre>
+
+    <p>ファイルを保存したら、ターミナルで <code>claude</code> を起動し直すか、現在のセッションで <code>/init</code> と打って再読み込みさせます。次のプロンプトから、Claude はこの自己紹介に沿って動きます。</p>
+
+    <div class="callout">
+      <div class="callout__label">CLAUDE.mdに書くべきこと／書かないべきこと</div>
+      <p>書くべき：<strong>毎回守ってほしいルール、フォルダ構成、用語、好み</strong>。<br/>
+      書かないべき：<strong>長すぎる個人史、関係のない雑談、児童の実名や住所</strong>。<br/>
+      コツは「<strong>もし新人の同僚が来たら最初に伝えること</strong>」を書く、です。</p>
+    </div>
+  </article>
+
+  <article id="s3-4" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-4</span>
+      <h3>Permission Mode の使い分け</h3>
+    </div>
+    <p>Claude Code は、ファイルを書き換えたりコマンドを実行したりする「<strong>力</strong>」を持っています。だからこそ、<strong>どこまで自動で動かせるか</strong>の設定が大切。Claude Code には複数の「Permission Mode」が用意されています。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>Plan モード</h4>
+        <p><strong>読み取りと提案だけ</strong>。実際のファイル変更はゼロ。「何をやろうとしているか」を最後に箇条書きで提示して、人の承認を待ちます。<strong>最初の1週間はこのモード推奨</strong>。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Normal モード（標準）</h4>
+        <p>1つの操作ごとに「これ実行していい？」と確認が入る。安全。慣れてくると煩わしいので、信頼できる作業はAuto-accept に切り替える流れ。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Accept Edits モード</h4>
+        <p>ファイル編集は自動承認、ただし<strong>コマンド実行（Bash）は確認する</strong>。文章生成・通信レイアウトなど、ファイル操作中心の作業に最適。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Auto モード（新）</h4>
+        <p>AIが安全な操作を自動判定して進める。リスクの高い行為（ファイル削除・外部送信など）は止まる。ベテラン向け。</p>
+      </div>
+    </div>
+
+    <p>モードの切り替えは、Claude Code のプロンプト上で <strong>Shift + Tab</strong> を押すと巡回します。画面に現在のモードが表示されます。</p>
+
+    <div class="callout good">
+      <div class="callout__label">先生向けの推奨運用</div>
+      <p>① <strong>最初の1週間</strong>：Plan モードで「提案だけ」見て、自分で確認しながら覚える。<br/>
+      ② <strong>2週目以降</strong>：Accept Edits モードで「ファイル編集は任せる」。Bashコマンドは目視確認。<br/>
+      ③ <strong>慣れたら</strong>：信頼できる定型作業は Auto モード、新しい作業は Plan モード、と作業内容で切り替える。<br/>
+      <strong>「速度より、見えていることが大事」</strong>です。</p>
+    </div>
+  </article>
+
+  <article id="s3-5" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-5</span>
+      <h3>校務での実践4連発</h3>
+    </div>
+    <p>ここからは具体例。実際に Cursor × Claude Code で何ができるかを、4つの校務で見ていきます。プロンプトは現実に使えるものを載せています。</p>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.1rem;margin:2rem 0 .8rem;color:var(--accent)">実践①：35人ぶんの所見を一括下書き</h4>
+    <p>仮名化した観点メモを児童ごとに1ファイル（<code>./shoken-memos/A.md</code>, <code>B.md</code>, ...）に保存しておきます。中身はこんな感じ。</p>
+    <pre><code># A児・観点メモ
+- 学習面: 算数の文章題で図を使う工夫が見られる。グループ学習で説明役を担う場面が増えた。
+- 生活面: 委員会活動に積極的。給食当番のとき、低学年に優しく声をかけている。
+- 教師観察: 自分の意見を言葉にするのに時間がかかるが、書く力で補える。
+（実名は使わず仮名A児で記述）</code></pre>
+
+    <p>Claude Code にこう頼みます。</p>
+
+    <pre><code>./shoken-memos/ にある全ファイルを読んで、
+それぞれを CLAUDE.md のルールに沿って所見化してほしい。
+出力は ./shoken-drafts/A.md, B.md ... の形で1人1ファイル。
+各120字以内、3文以内、ですます調。
+個人を特定する固有名詞は出さない。</code></pre>
+
+    <p>Claude Code はメモを順に読み、所見の下書きをファイルとして書き出します。Cursorのエディタで <code>shoken-drafts</code> フォルダを開けば、出来たての下書きが並んでいます。先生は1ファイルずつ目を通して、必要なら手で修正するだけ。</p>
+
+    <hr class="div"/>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.1rem;margin:2rem 0 .8rem;color:var(--accent)">実践②：学級通信を月次でまとめる</h4>
+    <p>過去の通信HTMLが <code>./tsushin/</code> に12号分溜まったとします。Claude Code にこう頼みます。</p>
+    <pre><code>./tsushin/ にある今月分の通信4号を読んで、
+月次まとめページを ./tsushin/monthly-summary.html として作って。
+
+構成:
+- 各号のリード文を集約した「今月のハイライト」
+- 行事カレンダー（日付付き）
+- 子どもの活躍を抽出した「今月の3つのエピソード」
+- 来月の予告（既存通信から拾える範囲で）
+
+デザインは ./tsushin/template.html を踏襲。</code></pre>
+
+    <p>これでHTMLが1枚生成され、保護者会や校長への提出資料として使えるレベルにまとまります。手作業で集計していたら半日コースの仕事です。</p>
+
+    <hr class="div"/>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.1rem;margin:2rem 0 .8rem;color:var(--accent)">実践③：単元計画を全時ぶん設計</h4>
+    <p>教科書PDFと指導要領の該当部分を <code>./docs/</code> に置いて、こう頼みます。</p>
+    <pre><code>5年算数「割合」全12時間の単元計画を、
+./docs/ にある教科書PDFと指導要領を参照して作って。
+
+出力: ./units/wariai/
+- 00-unit-overview.md（単元のねらい・評価規準）
+- 01-introduction.md（第1時）
+- 02-...md（以降、第12時まで）
+- 99-reflection-card.md（振り返りカード3パターン）
+
+各時の構成: めあて／導入／展開／まとめ／中心発問／板書例。
+A児・B児・C児（仮名）の特性に応じた補足案を最後に1段落。</code></pre>
+
+    <p>15分後にはフォルダの中に14ファイルが揃っています。ここから自分の判断で削ったり書き加えたりするだけ。0から書き始めなくて済むのが、何よりの効能です。</p>
+
+    <hr class="div"/>
+
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.1rem;margin:2rem 0 .8rem;color:var(--accent)">実践④：GASで時数管理を自動化</h4>
+    <p>Google Sheets で時数管理を運用したい。Claude Code に GAS（Google Apps Script）を書いてもらいます。</p>
+    <pre><code>毎日の授業時数を入力するGoogle Sheetsを動かすGASを書いて。
+
+仕様:
+- 日付・教科・時数・備考の4列で入力
+- 別シートに「教科別累計」を自動集計
+- 月末に「年間時数到達率」のシートを更新
+- ウェブアプリ版として doGet で簡易フォームを表示
+
+ファイル: ./scripts/jisu-manager.gs
+コメントは日本語で。clasp で deploy する想定。</code></pre>
+
+    <p>Claude Codeが書いてくれた <code>.gs</code> ファイルを、<code>clasp push</code> でGoogle Apps Script に反映。ブラウザでウェブアプリ版を開けば、毎日校務PCから入力できる時数管理ツールが完成します。Antigravity でアプリ開発経験のある方なら、ここは特に違和感なく入れるはずです。</p>
+
+    <div class="callout good">
+      <div class="callout__label">4連発の所要時間（実測ベース）</div>
+      <p>① 所見一括下書き：<strong>15分</strong>（35人ぶん）<br/>
+      ② 学級通信の月次まとめ：<strong>10分</strong><br/>
+      ③ 単元計画全12時：<strong>20分</strong>（叩き台レベル）<br/>
+      ④ GAS時数管理：<strong>30分</strong>（ベース実装）<br/>
+      合計 <strong>1時間15分</strong> で、これまで <strong>合計30時間以上かかっていた作業</strong> が叩き台レベルで揃います。仕上げの判断は先生の仕事として残りますが、出発点が確保される効果は計り知れません。</p>
+    </div>
+  </article>
+
+  <article id="s3-6" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-6</span>
+      <h3>Skill / Slash Commands / Hooks</h3>
+    </div>
+    <p>Claude Code をもう一段使いこなしたい人向けの3つの仕組みを、駆け足で紹介します。詳細は別講座「Antigravity Skill構築ガイド」で深掘りしますが、ここでは「<strong>何ができるか</strong>」だけ押さえてください。</p>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>Skill（自分専用のマニュアル）</h4>
+        <p><code>.claude/skills/&lt;名前&gt;/SKILL.md</code> に、特定の仕事の進め方を書いておく。Claude Code が「この種の仕事のときはこのマニュアルを見ればいい」と<strong>自動で参照</strong>してくれる。所見ジェネレーター、単元計画ジェネレーター、学級通信フォーマッターなど、繰り返す仕事はすべて Skill 化できる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Slash Commands（呼び出しの一発化）</h4>
+        <p><code>.claude/commands/&lt;名前&gt;.md</code> にショートカット的なプロンプトを保存しておき、チャットで <code>/&lt;名前&gt;</code> と打って呼び出す。<code>/shoken</code> で所見モード、<code>/tsushin</code> で通信モード、のように切り替えられる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>Hooks（自動で動く仕掛け）</h4>
+        <p>「<strong>ファイルを書き換える直前にチェック走らせる</strong>」「<strong>セッション開始時に挨拶させる</strong>」など、ルールを <code>settings.json</code> に書いておくと、Claude Codeが必ず実行する。「<strong>個人情報チェック</strong>」「<strong>自動バックアップ</strong>」など、強制したい安全策を入れるのに最適。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>MCP（外部システム連携）</h4>
+        <p>Google ドライブ、Slack、Notion、Google Calendar など、外部サービスを Claude Code から直接触れるようにする仕組み。中級者以上向け。本講座の範囲外ですが、将来的に「<strong>校務システムと連携する自分専用Bot</strong>」を作れる可能性があります。</p>
+      </div>
+    </div>
+
+    <p>3つを組み合わせると、たとえばこんな運用ができます。</p>
+
+    <pre><code>【シナリオ：通知表シーズンの放課後ルーチン】
+1. 児童ごとの観点メモを ./shoken-memos/ に書き溜める
+2. ターミナルで /shoken と打つ（Slash Command が起動）
+3. 内部で「所見ジェネレーターSkill」が呼ばれる
+4. PreToolUse Hookが「実名チェック」を走らせる（あれば中止）
+5. ./shoken-drafts/ に下書きが出力される
+6. 先生はファイルを開いて目視確認・微修正のみ</code></pre>
+
+    <p>「<strong>自分の働き方そのもの</strong>」を仕組みに落とせる、というのが Claude Code の本当の強さです。</p>
+  </article>
+
+  <article id="s3-7" class="lesson">
+    <div class="lesson__head">
+      <span class="lesson__no">3-7</span>
+      <h3>学校・学年で共有する</h3>
+    </div>
+    <p>作った Skill や CLAUDE.md は、フォルダごと配ることができます。学年団・教科部会・校内研究で展開すると、同じ仕組みを全員で使えるようになります。</p>
+    <ol class="numbered">
+      <li>共有したいフォルダを丸ごとコピー（Skill本体・参考資料・テンプレ）</li>
+      <li>受け取った先生は、自分の作業フォルダに配置（<code>.claude/skills/</code> 配下など）</li>
+      <li>Cursor で開き直すと、すぐに呼び出せるようになる</li>
+    </ol>
+
+    <div class="callout warn">
+      <div class="callout__label">共有前のチェック（必ず目視で）</div>
+      <p>個人情報・校内限定情報・特定児童を想起させる記述が、SKILL.md・CLAUDE.md・テンプレファイルに残っていないか、必ず確認してから配ってください。<strong>一度配ったものは取り戻せません。</strong> Git で管理している場合は、コミット履歴にも個人情報が残らないように要注意です。</p>
+    </div>
+
+    <p>学校全体でClaudeが浸透してくると、「<strong>あの先生のSkillをもらえばいい</strong>」「<strong>このProjectsの設計を引き継げばいい</strong>」という文化が生まれます。AIを「個人で使う道具」から「<strong>チームの仕組み</strong>」に育てていけるのが、Claude を学校に入れる本当の価値です。あなたの工夫が、学校の財産に変わります。</p>
+  </article>
+</section>
+
+<!-- ===== 30-DAY ROADMAP ===== -->
+<section id="roadmap" class="roadmap">
+  <div class="section__head">
+    <span class="section__num">30</span>
+    <h2 class="section__title">夏休みのClaudeマスターへの道</h2>
+  </div>
+  <p class="section__lead">「いつか使えるようになりたい」を「30日後にマスター」に変えるための、日割りロードマップです。<strong>1日30分〜60分</strong>のペース。夏休みでも、平日の放課後でも、自分のペースで進められるよう設計しています。Day 30 のあなたは、間違いなく「Claudeのいる教員」になっています。</p>
+
+  <div class="roadmap__hero">
+    <div class="roadmap__tag">30-DAY MASTER PROGRAM</div>
+    <h3 class="roadmap__title">Day 1 の「触ってみる」から、Day 30 の「学年で配る」まで。</h3>
+    <p class="roadmap__lead">Week 1 は慣れる、Week 2 は整える、Week 3 は仕組む、Week 4 は広げる。各週末に振り返りを置いています。毎日のチェックリストとして使ってください。</p>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week">
+    <div class="week__head">
+      <span class="week__no">WEEK 01</span>
+      <h3 class="week__title">慣れる — Claude.ai に触れて、感覚を掴む</h3>
+      <span class="week__sub">1日 30分 / Claude Pro 契約スタート</span>
+    </div>
+    <ul class="days">
+      <li class="day">
+        <div class="day__no">DAY 01</div>
+        <h4 class="day__title">アカウント開設</h4>
+        <p class="day__body">claude.ai でサインアップ。Pro プランを契約。「あなたは小学校教員の補助役です」と話しかけて、自己紹介させてみる。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 02</div>
+        <h4 class="day__title">所見の下書きを1人ぶん</h4>
+        <p class="day__body">仮名で観点メモを書いて Claude に渡し、120字の所見にしてもらう。自分の文体との違いを観察。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 03</div>
+        <h4 class="day__title">Projects に挑戦</h4>
+        <p class="day__body">「学級経営」Project を作って、Instructions に自分のルール（文体・避けたい語）を入れる。同じ依頼を投げて違いを見る。</p>
+        <span class="day__time">⏱ 40分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 04</div>
+        <h4 class="day__title">学級通信のひな型を作る</h4>
+        <p class="day__body">Artifacts で HTML の通信レイアウトを生成。色・余白・写真スペースの指示を試す。</p>
+        <span class="day__time">⏱ 45分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 05</div>
+        <h4 class="day__title">他AIと比べてみる</h4>
+        <p class="day__body">同じプロンプトを ChatGPT / Gemini に投げて、応答を比較。Claudeの強み（慎重さ・長文）を体感する。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 06</div>
+        <h4 class="day__title">お気に入りプロンプト集を作る</h4>
+        <p class="day__body">うまくいった依頼文を、自分のメモ帳に5つ保存。あとで Skill 化する種になる。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day checkpoint">
+        <div class="day__no">DAY 07 ✓</div>
+        <h4 class="day__title">Week 1 ふりかえり</h4>
+        <p class="day__body">できたこと・気づきをノート1ページに。来週から Cursor を入れる準備として、フォルダを1つ作る。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week">
+    <div class="week__head">
+      <span class="week__no">WEEK 02</span>
+      <h3 class="week__title">整える — Cursor を入れ、Claude Code を呼び出す</h3>
+      <span class="week__sub">1日 45分 / Cursor 導入</span>
+    </div>
+    <ul class="days">
+      <li class="day">
+        <div class="day__no">DAY 08</div>
+        <h4 class="day__title">Cursor をインストール</h4>
+        <p class="day__body">cursor.com からダウンロード。日本語化設定。VS Code との違いを軽く眺める。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 09</div>
+        <h4 class="day__title">作業フォルダを作る</h4>
+        <p class="day__body">teacher-work フォルダを作成し、Cursor で開く。空のままで「ファイル」「ターミナル」「左パネル」の場所を把握。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 10</div>
+        <h4 class="day__title">Claude Code をインストール</h4>
+        <p class="day__body">Cursor の統合ターミナルから1コマンドでインストール。<code>claude --version</code> で確認。</p>
+        <span class="day__time">⏱ 45分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 11</div>
+        <h4 class="day__title">初対話</h4>
+        <p class="day__body"><code>claude</code> でログイン。「Hello」してみる。日本語で「自己紹介して」と頼む。Plan モードに切り替えてみる（Shift+Tab）。</p>
+        <span class="day__time">⏱ 45分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 12</div>
+        <h4 class="day__title">CLAUDE.md を書く</h4>
+        <p class="day__body">自己紹介・好み・ルールを書いた CLAUDE.md を作業フォルダに置く。Claudeを再起動して、自己紹介が変わるか確認。</p>
+        <span class="day__time">⏱ 50分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 13</div>
+        <h4 class="day__title">最初のファイル生成</h4>
+        <p class="day__body">「仮の所見メモを A〜C児ぶん作って」と頼んでみる。ファイルがフォルダに現れる感覚を体感。</p>
+        <span class="day__time">⏱ 45分</span>
+      </li>
+      <li class="day checkpoint">
+        <div class="day__no">DAY 14 ✓</div>
+        <h4 class="day__title">Week 2 ふりかえり</h4>
+        <p class="day__body">「全部見える」安心感を体感。差分ビューの動きをひと通り触ってみる。Permission Mode を3種類試して、お気に入りを決める。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week">
+    <div class="week__head">
+      <span class="week__no">WEEK 03</span>
+      <h3 class="week__title">仕組む — 校務に Claude Code を組み込む</h3>
+      <span class="week__sub">1日 60分 / 実務を回し始める</span>
+    </div>
+    <ul class="days">
+      <li class="day">
+        <div class="day__no">DAY 15</div>
+        <h4 class="day__title">所見ジェネレーター</h4>
+        <p class="day__body">仮名で5人ぶんの観点メモを書き、Claude Code に一括で所見化させる。出力ファイルを1つずつ目で確認。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 16</div>
+        <h4 class="day__title">35人ぶんへスケール</h4>
+        <p class="day__body">人数を本番規模に拡大。所要時間を計測。修正にかかった時間も記録。Before/After を実感。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 17</div>
+        <h4 class="day__title">学級通信テンプレ</h4>
+        <p class="day__body">HTML テンプレートを1つ作って tsushin-template.html として保存。Claude Code が参照する型にする。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 18</div>
+        <h4 class="day__title">月次まとめスクリプト</h4>
+        <p class="day__body">過去の通信を読ませて、月次サマリーHTMLを自動生成させる。校長提出資料として使える形に整える。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 19</div>
+        <h4 class="day__title">GAS 連携にトライ</h4>
+        <p class="day__body">時数管理 or 出欠集計の GAS を Claude Code に書かせる。clasp で push してみる（できる人向け、難しければスキップ可）。</p>
+        <span class="day__time">⏱ 70分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 20</div>
+        <h4 class="day__title">Skill 化に着手</h4>
+        <p class="day__body">所見ジェネレーターを SKILL.md に切り出す。「.claude/skills/shoken-helper/SKILL.md」を作成。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day checkpoint">
+        <div class="day__no">DAY 21 ✓</div>
+        <h4 class="day__title">Week 3 ふりかえり</h4>
+        <p class="day__body">「自分の型」が見え始める。今週で1番効いた仕組みを言語化。次週で広げるテーマを1つ決める。</p>
+        <span class="day__time">⏱ 30分</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week">
+    <div class="week__head">
+      <span class="week__no">WEEK 04</span>
+      <h3 class="week__title">広げる — Skill を増やし、学年に配る</h3>
+      <span class="week__sub">1日 60分 / マスターへの仕上げ</span>
+    </div>
+    <ul class="days">
+      <li class="day">
+        <div class="day__no">DAY 22</div>
+        <h4 class="day__title">Skill構築ガイドを学ぶ</h4>
+        <p class="day__body">姉妹サイト「Antigravity Skill構築ガイド」を読み込む。SKILL.md の文法・description のコツを習得。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 23</div>
+        <h4 class="day__title">単元計画 Skill</h4>
+        <p class="day__body">5年〇〇の単元計画 Skill を作成。教科書PDFと指導要領を参照させる構成に。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 24</div>
+        <h4 class="day__title">板書・ワークシート Skill</h4>
+        <p class="day__body">単元計画Skillと連携する Skill を2つ追加。Skill同士を呼び出し合う構造を試す。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 25</div>
+        <h4 class="day__title">振り返りカード Skill</h4>
+        <p class="day__body">毎時の振り返りカードを3パターンで生成する Skill。子どもの実態に応じた問いを選ばせる。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 26</div>
+        <h4 class="day__title">Slash Commands に切り出す</h4>
+        <p class="day__body">/shoken /tsushin /tangen /furikaeri を作成。コマンド一発で呼べる体験を整備。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 27</div>
+        <h4 class="day__title">学年の先生に共有</h4>
+        <p class="day__body">フォルダを1つ、信頼できる同僚に渡してみる。個人情報チェックを目視で必ず行ってから。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 28</div>
+        <h4 class="day__title">フィードバックを反映</h4>
+        <p class="day__body">同僚の使ってみた感想を SKILL.md / CLAUDE.md に反映。「他人が読んでも分かる」言葉に直す。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+      <li class="day">
+        <div class="day__no">DAY 29</div>
+        <h4 class="day__title">自分用ロードマップ</h4>
+        <p class="day__body">来学期、自分は Claudeで何を増やしたいか。未着手の校務領域を3つ書き出して、優先度を決める。</p>
+        <span class="day__time">⏱ 45分</span>
+      </li>
+      <li class="day checkpoint">
+        <div class="day__no">DAY 30 ★</div>
+        <h4 class="day__title">Claudeマスター修了</h4>
+        <p class="day__body">30日のふりかえり。Before/Afterを書き出して、誰かに語れる状態に。お疲れ様でした。あとは育てていくだけです。</p>
+        <span class="day__time">⏱ 60分</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="callout good">
+    <div class="callout__label">続けるコツ</div>
+    <p>毎日「1個だけ」進める。<strong>完璧を狙わない</strong>。やり残しは翌日に回してOK。30日終わったら、自分なりの「Day 31〜60」を作る。<strong>Claudeとの関係は、続けるほど精度が上がります</strong>。</p>
+  </div>
+</section>
+
+<!-- ===== FUTURE VISION ===== -->
+<section id="future" class="future">
+  <div class="section__head">
+    <span class="section__num">∞</span>
+    <h2 class="section__title">教職としてできることが、こう増える</h2>
+  </div>
+  <p class="section__lead">30日プログラムを終えたあなたは、もう「Claudeが使える先生」です。ここから先、教職としてどんなことが「できるように」なっていくのか、4つの領域で展望します。これは未来予想ではなく、<strong>今すでに先行している先生たちが実際に手にしている景色</strong>です。</p>
+
+  <div class="visionCards">
+    <div class="visionCard">
+      <div class="visionCard__icon">A</div>
+      <h4>授業づくり</h4>
+      <p><strong>毎回の授業に「研究授業レベル」の準備時間</strong>を取れるようになります。単元計画はSkill、板書はテンプレ、ワークシートは3レベル展開。本来やりたかった「子ども理解」「教材研究」に時間を返せます。</p>
+      <ul>
+        <li>導入課題のバリエーション展開</li>
+        <li>個別最適化したワーク（易・標準・発展）</li>
+        <li>毎時の振り返りカード自動生成</li>
+        <li>研究授業の指導案・略案を半日で</li>
+      </ul>
+    </div>
+    <div class="visionCard">
+      <div class="visionCard__icon">B</div>
+      <h4>校務</h4>
+      <p><strong>書類仕事の8割が「先に下書きが用意されている」状態</strong>に。所見・通信・指導要録・支援計画・委員会議事録。空欄から書き出す経験が消え、判断と確認に集中できます。</p>
+      <ul>
+        <li>所見・要録の文体テンプレ化</li>
+        <li>学級通信を週2ペースに</li>
+        <li>校内研究の冊子をいつでも質問</li>
+        <li>保護者対応のメール下書き</li>
+      </ul>
+    </div>
+    <div class="visionCard">
+      <div class="visionCard__icon">C</div>
+      <h4>個別最適</h4>
+      <p><strong>特別支援・通常学級どちらでも、子ども1人ひとりに合わせた教材</strong>が現実的に作れます。「全員に同じプリント」から、「<strong>その子に最適なプリント</strong>」への移行が、時間的に可能になります。</p>
+      <ul>
+        <li>レベル別ワークの常設化</li>
+        <li>個別の支援計画のアップデート</li>
+        <li>子どもごとの振り返り問いの差し替え</li>
+        <li>家庭学習プランの個別生成</li>
+      </ul>
+    </div>
+    <div class="visionCard">
+      <div class="visionCard__icon">D</div>
+      <h4>チームづくり</h4>
+      <p><strong>個人の工夫が、学年・学校の財産になる</strong>。Skillやテンプレを共有する文化が生まれると、若手・新採用の先生の立ち上がりが圧倒的に早くなります。あなたの30日が、学校の10年を変えます。</p>
+      <ul>
+        <li>学年団でSkillを持ち回り運用</li>
+        <li>新採用研修にClaude基本パッケージ</li>
+        <li>校務分掌の引き継ぎ資料を自動更新</li>
+        <li>校内研究紀要の編集を仕組み化</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="manifesto">
+    <p class="manifesto__quote">
+      AIは、先生の代わりにはなりません。<br/>
+      でも、先生の <strong>「やりたかったけれど時間がなかったこと」</strong> を、<br/>
+      もう一度、可能にしてくれます。<br/>
+      Claudeとともに、教職をもう一度、面白がってみませんか。
+    </p>
+  </div>
+</section>
+
+<!-- ===== RESOURCES ===== -->
+<section id="resources" class="resources">
+  <div class="section__head">
+    <span class="section__num">R</span>
+    <h2 class="section__title">資料室</h2>
+  </div>
+
+  <div class="resBlock">
+    <h3>用語集</h3>
+    <dl class="terms">
+      <dt>Claude</dt><dd>Anthropic 社が開発した対話型AI。長文理解・慎重な応答・コード生成に強い。</dd>
+      <dt>Anthropic</dt><dd>Claude を開発する米国のAI企業。「安全で正直なAI」を掲げて設立された。</dd>
+      <dt>Claude.ai</dt><dd>ブラウザで使う Claude の本拠地。Projects・Artifacts などの機能が乗っている。</dd>
+      <dt>Claude Code</dt><dd>ターミナル／IDE で動く Claude。ファイル操作・自動化・コード生成が得意。本講座のメイン。</dd>
+      <dt>Cursor</dt><dd>VS Code をベースにしたAI内蔵エディタ。Claude Code との相性が抜群。本講座推奨。</dd>
+      <dt>Projects</dt><dd>Knowledge（資料）と Instructions（ルール）を Claude に持たせる Claude.ai の機能。毎回の貼り直しが不要に。</dd>
+      <dt>Artifacts</dt><dd>Claude の生成物を専用キャンバスに表示する機能。HTML・スライド・コードがその場でプレビューできる。</dd>
+      <dt>Cowork</dt><dd>Claude と「同僚のように」協働する使い方の総称。本講座で扱う基本姿勢。</dd>
+      <dt>Design</dt><dd>Claude にレイアウト・スライド・通信物などのビジュアルを生成させる使い方。</dd>
+      <dt>CLAUDE.md</dt><dd>プロジェクトフォルダの直下に置く設定ファイル。Claude Code がセッション開始時に自動で読む。</dd>
+      <dt>Skill</dt><dd>Claude Code に「自分の仕事のやり方」を覚えさせるマニュアル。SKILL.md 1枚で完結。</dd>
+      <dt>Slash Commands</dt><dd>「/名前」で呼び出せるショートカット。よく使う依頼をワンキー化できる。</dd>
+      <dt>Hooks</dt><dd>Claude Code の動作の前後に自動で走らせるチェック・処理。「強制」したい安全策に最適。</dd>
+      <dt>Permission Mode</dt><dd>Claude Code の動作許可レベル。Plan / Normal / Accept Edits / Auto の4種類。Shift+Tab で切替。</dd>
+      <dt>MCP</dt><dd>Model Context Protocol。Claude Code から外部システム（Drive・Slack等）を触る仕組み。発展編。</dd>
+      <dt>Pro プラン</dt><dd>Claude の月額契約（約 $20）。Claude Code を使うのに必要。</dd>
+      <dt>GAS / clasp</dt><dd>Google Apps Script と、そのローカル開発ツール。Claude Code から書ける。</dd>
+    </dl>
+  </div>
+
+  <div class="resBlock">
+    <h3>プロンプト・テンプレート集</h3>
+    <p style="font-size:.92rem;color:var(--ink-2);line-height:1.9;margin:0 0 1rem">そのままコピペして使えるテンプレートです。〇〇の部分をご自身の状況に置き換えてください。</p>
+    <pre><code>【所見ドラフト】
+A児（仮名）の観点メモから所見の下書きを作って。
+- 文体：ですます調
+- 字数：120字以内 / 3文以内
+- 否定形・「がんばる」「努力する」は使わない
+- 観点：（学習面 / 生活面）
+
+メモ：
+（ここに観点メモを貼る）</code></pre>
+
+    <pre><code>【学級通信】
+A4一枚、HTMLで学級通信を作って。
+- テーマ：（テーマ）
+- 構成：見出し3つ＋保護者欄
+- 文体：ですます調、やわらかめ
+- デザイン：暖色系・丸ゴシック・余白多め
+- 写真スペース：本文中に3カ所</code></pre>
+
+    <pre><code>【単元計画】
+〇年〇〇科「（単元名）」全〇時間の単元計画を作って。
+- 出力先：./units/（単元名）/
+- 各時のファイル：めあて／導入／展開／まとめ／中心発問／板書例
+- 単元総括：00-overview.md
+- 振り返りカード：99-reflection.md
+- 補足：A児・B児（仮名）の特性に応じた1段落</code></pre>
+
+    <pre><code>【ワークシート3レベル】
+〇年〇〇科の練習プリントを、易・標準・発展の3レベルで作って。
+- 各レベル A4一枚
+- 解答は別ページ
+- 出力：./worksheets/（テーマ）/level-1.md, level-2.md, level-3.md</code></pre>
+
+    <pre><code>【保護者メール下書き】
+保護者から〇〇の連絡があった。返信の下書きを丁寧めに。
+- 冒頭：感謝→事実確認→こちらの対応→今後のお願い
+- 200字以内、ですます調
+- 「申し訳ございません」は1回まで</code></pre>
+  </div>
+
+  <div class="resBlock">
+    <h3>CLAUDE.md テンプレート</h3>
+    <pre><code># 私について
+- 役割: 〇〇
+- 受け持ち: 〇年〇組（〇人）
+- 校内分掌: 〇〇
+
+# このフォルダで頼みたいこと
+- 〇〇の下書き
+- 〇〇の自動化
+
+# 守ってほしいルール
+- 文体: ですます調
+- 児童の実名は絶対に書かない（仮名はA児・B児で）
+- 否定形・断定的評価は避ける
+- 不明点があれば必ず質問する
+
+# よく使うファイルの場所
+- 〇〇: ./〇〇/
+- 〇〇: ./〇〇/
+
+# 連携している外部資料
+- 〇〇は ./docs/ 配下</code></pre>
+  </div>
+
+  <div class="resBlock">
+    <h3>共有前チェックリスト</h3>
+    <ul class="checklist">
+      <li>個人情報（氏名・住所・連絡先）が文中に残っていないか</li>
+      <li>特定児童を強く想起させる表現が含まれていないか</li>
+      <li>校内限定の規程・運用が外部に出てまずい記述になっていないか</li>
+      <li>Projects の Instructions に、文体・字数・避けたい表現が明記されているか</li>
+      <li>CLAUDE.md の name と description が、他人が読んで意味が分かるか</li>
+      <li>SKILL.md の手順が、自分以外の先生にも再現できる表現になっているか</li>
+      <li>Git で管理している場合、コミット履歴にも個人情報が残っていないか</li>
+      <li>共有先が校内ルール・自治体ルールで Claude 利用が許可されているか</li>
+    </ul>
+  </div>
+
+  <div class="resBlock">
+    <h3>困ったときの対処</h3>
+    <table class="compare">
+      <thead>
+        <tr><th>困りごと</th><th>原因</th><th>対処</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-th="困りごと">出力が長すぎる</td>
+          <td data-th="原因">字数指示が曖昧</td>
+          <td data-th="対処">「120字以内」「3文以内」と明記</td>
+        </tr>
+        <tr>
+          <td data-th="困りごと">出力が抽象的</td>
+          <td data-th="原因">入力が抽象的</td>
+          <td data-th="対処">具体例（観点・場面）を3つ渡す</td>
+        </tr>
+        <tr>
+          <td data-th="困りごと">同じ言い回しが続く</td>
+          <td data-th="原因">語尾の制約なし</td>
+          <td data-th="対処">「同じ語尾を3回連続させない」</td>
+        </tr>
+        <tr>
+          <td data-th="困りごと">学校の慣例とズレる</td>
+          <td data-th="原因">ローカルルール未伝達</td>
+          <td data-th="対処">避けたい語をリスト化してInstructionsへ</td>
+        </tr>
+        <tr>
+          <td data-th="困りごと">Claude Code が止まらない</td>
+          <td data-th="原因">権限が緩い</td>
+          <td data-th="対処">Permission ModeをPlanに戻す（Shift+Tab）</td>
+        </tr>
+        <tr>
+          <td data-th="困りごと">日本語が崩れる</td>
+          <td data-th="原因">英語混在</td>
+          <td data-th="対処">「日本語のみで出力」と明示</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="faq">
+  <div class="section__head">
+    <span class="section__num">?</span>
+    <h2 class="section__title">よくある質問</h2>
+  </div>
+
+  <details>
+    <summary>無料版でどこまでできますか？</summary>
+    <div class="body">
+      <p>チャットとArtifactsは無料版でも一部使えます。ただし回数制限や上位モデルの利用制限があり、Projects のフル機能や Claude Code の利用には Pro プラン（月20ドル前後）が現実的に必要です。「触ってみる」は無料、「業務で使い倒す」はPro、が目安です。<strong>Claude Code は無料プランでは使えない</strong>点に注意。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>校務PCでも使えますか？</summary>
+    <div class="body">
+      <p>校務PCの利用ルールは自治体・学校で異なります。Claudeに限らず、生成AIの校務利用は校内規程と情報セキュリティポリシーの確認が必須です。許可された環境で、許可された情報の範囲で使ってください。判断に迷うときは、管理職と情報担当に相談を。</p>
+      <p>現実解として、「<strong>生成だけは私物PCで、出力ファイルだけ校務PCに持ち込む</strong>」というハイブリッド運用も多くの先生が採用しています。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>児童の情報を入れて大丈夫ですか？</summary>
+    <div class="body">
+      <p>氏名・住所・連絡先などの個人情報は<strong>絶対に入れないでください</strong>。観点・行動の様子だけを<strong>仮名（A児・B児など）</strong>で扱うのが基本です。Projects の Knowledge にも、AI に送るメモにも、CLAUDE.md にも、個人を特定できる情報は残しません。</p>
+      <p>仮名化したコピーを別途用意してから Claude に渡す、というワンクッションを習慣にしてください。「入れない」が最強の防御策です。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>ChatGPTを使っているのですが、乗り換えるべき？</summary>
+    <div class="body">
+      <p>乗り換えではなく<strong>使い分け</strong>がおすすめです。長文・所見・通知表・コードはClaude、アイデア出し・画像・GPTsはChatGPT、Workspace連携はGemini、というように役割で呼び分けるとそれぞれの強みを取り切れます。本講座ではClaudeをメインに据えていますが、他のAIを否定するものではありません。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>うまく動かない／思った答えが返ってきません。</summary>
+    <div class="body">
+      <p>多くは指示が抽象的すぎるのが原因です。「<strong>誰向け／何字／どんな文体／避けたい表現／最終形のイメージ</strong>」を1つでも具体化すると、出力が劇的に変わります。Projects に Instructions を置く、CLAUDE.md にルールを書く、で「毎回書かなくて済む」状態を作るのが王道です。</p>
+      <p>それでもダメな場合は、プロンプトを Claude 自身に渡して「<strong>この指示の何が曖昧か教えて</strong>」と聞いてみてください。Claudeは自己診断もできます。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Claude Codeはプログラミングできないと無理ですか？</summary>
+    <div class="body">
+      <p>不要です。指示はほぼ日本語で、コードを書くのはClaude側です。先生は「何をやってほしいか」を言葉で伝えるだけ。最初は1ファイル・1作業からで十分です。本講座の30日プログラムは、プログラミング未経験者を想定して設計されています。</p>
+      <p>とはいえ、HTMLやCSSの初歩を眺めておくと、Designの指示精度が上がります。「<strong>display: flex で横並び</strong>」「<strong>border-radius で角丸</strong>」くらいの語彙があると指示の解像度がぐっと上がるので、興味があれば軽く触れてみてください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>なぜ Antigravity ではなく Cursor を勧めるんですか？</summary>
+    <div class="body">
+      <p>Antigravity（同じくAI内蔵エディタ）でも Claude Code は動きます。本講座で Cursor を推す理由は3つ。①日本語UIの完成度が高い、②差分表示・選択範囲のAI連携などClaude Code との相性が抜群、③国内外の情報量が多く詰まったとき検索しやすい。Antigravity で慣れている方はそのまま使い続けてもOKです。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>料金は合計いくらかかりますか？</summary>
+    <div class="body">
+      <p>標準セットは「<strong>Claude Pro $20/月 ＋ Cursor 無料版 or Pro $20/月</strong>」。月 $20〜$40（約 ¥3,000〜¥6,000）が目安です。Cursor は無料版でも統合ターミナル＋Claude Codeの運用は可能なので、まずは $20/月から始めてOK。校内予算で導入できる学校も増えてきています。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>30日プランをこなせる自信がありません。</summary>
+    <div class="body">
+      <p>大丈夫です。30日は「目安」であって「ノルマ」ではありません。1日できなくても、翌日に回せばOK。逆に、興味がある週は1日2コマ進めても構いません。<strong>大事なのは「途中でやめないこと」</strong>。 Week 2 まで進めば、Claude Code が手元に住むようになります。そこまで来れば自然と続きます。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>このサイトを学校の先生にも見せていいですか？</summary>
+    <div class="body">
+      <p>本サイトは T-Lab 受講者向けの限定公開資料です。共有はT-Lab事務局までご相談ください。受講前にお伝えするのは構いません。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>子どもたちにもClaudeを使わせていいですか？</summary>
+    <div class="body">
+      <p>Claudeの利用規約上、18歳未満の単独利用は制限されています。授業で子どもに触れさせる場合は、<strong>教員のアカウントで教員が操作し、子どもには出力結果のみ見せる</strong>運用が現実解です。校内ルール・保護者への説明・教育委員会との調整を経たうえで活用してください。</p>
+    </div>
+  </details>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__logo">T-Lab</div>
+      <div class="footer__sub">Claude Lab for Teachers</div>
+    </div>
+    <div class="footer__meta">
+      <p>運営：合同会社サポーティア</p>
+      <p>本サイトの内容を講座外に転載することはご遠慮ください。</p>
+      <p class="footer__copy">© T-Lab. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#site -->
+
+<script>
+(function(){
+  var STORAGE_KEY = "t-lab-claude-gate-unlocked";
+  var PASS_HASH   = "c4178dbfc3a6f2c5abff60a08439d581c1256ac8491d3c6eb2cdb7c9b4a97e48";
+
+  var gate  = document.getElementById("gate");
+  var form  = document.getElementById("gate-form");
+  var input = document.getElementById("gate-input");
+  var err   = document.getElementById("gate-error");
+
+  function unlock(){
+    document.body.classList.add("is-unlocked");
+    if(gate) gate.classList.add("is-hidden");
+    try { localStorage.setItem(STORAGE_KEY, "1"); } catch(_) {}
+  }
+
+  function normalize(s){
+    if(!s) return "";
+    return s
+      .replace(/[！-～]/g, function(c){ return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+      .replace(/　/g, " ")
+      .trim();
+  }
+
+  function bytesToHex(buf){
+    var bytes = new Uint8Array(buf), hex = "";
+    for(var i=0;i<bytes.length;i++){
+      var h = bytes[i].toString(16);
+      if(h.length===1) h = "0" + h;
+      hex += h;
+    }
+    return hex;
+  }
+
+  function sha256(text){
+    var data = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", data).then(bytesToHex);
+  }
+
+  try {
+    if (localStorage.getItem(STORAGE_KEY) === "1") {
+      unlock();
+    }
+  } catch(_) {}
+
+  if (form) {
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      err.textContent = "";
+      var val = normalize(input.value);
+      if (!val) { err.textContent = "合言葉を入力してください"; return; }
+      sha256(val).then(function(h){
+        if (h === PASS_HASH) {
+          unlock();
+        } else {
+          err.textContent = "合言葉が違います";
+          input.select();
+        }
+      }).catch(function(){
+        err.textContent = "認証エラーが発生しました";
+      });
+    });
+    if (!document.body.classList.contains("is-unlocked")) {
+      setTimeout(function(){ try { input.focus(); } catch(_){} }, 80);
+    }
+  }
+
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a[href^='#']");
+    if(!a) return;
+    var id = a.getAttribute("href").slice(1);
+    if(!id) return;
+    var target = document.getElementById(id);
+    if(!target) return;
+    e.preventDefault();
+    var top = target.getBoundingClientRect().top + window.scrollY - 70;
+    window.scrollTo({ top: top, behavior: "smooth" });
+  });
+})();
+</script>
+</body>
+</html>
