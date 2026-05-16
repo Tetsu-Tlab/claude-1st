@@ -321,8 +321,8 @@ body.is-unlocked #site{display:block}
     </div>
     <div class="card">
       <div class="card__num">B</div>
-      <h3>Cowork &amp; Design で実務を回せる</h3>
-      <p>Projects に資料を持たせて「同僚化」、Artifacts で学級通信・スライド・HTMLレイアウトを対話だけで仕上げる。チャット画面が「制作スタジオ」に変わります。</p>
+      <h3>Claude Cowork × Claude Design を使い分けられる</h3>
+      <p>2026年に追加された2大ツールを完全攻略。<strong>Cowork</strong>でPC内の作業を「AI同僚」に任せ、<strong>Design</strong>で学級通信・授業スライド・ポスターをキャンバス上で仕上げる。チャット画面の外まで、Claudeの相棒関係が広がります。</p>
     </div>
     <div class="card">
       <div class="card__num">C</div>
@@ -409,22 +409,30 @@ body.is-unlocked #site{display:block}
       <div class="callout__label">先生にとっての立ち位置</div>
       <p>Claudeは「優秀で、慎重で、長い文章をきちんと読んでくれる同僚」のような存在です。早口で答えるのではなく、まず文脈を読み、必要なら確認を返し、それから動く――そんなペース感のAI。所見・通知表・要録など、<strong>「ミスれない」仕事ほど Claude が向いています</strong>。</p>
     </div>
-    <p>本講座で扱う Claude には、大きく分けて3つの入り口があります。それぞれ別物ではなく、<strong>1つのアカウントで全部使える</strong>と考えてOKです。</p>
+    <p>本講座で扱う Claude には、大きく分けて<strong>5つの入り口</strong>があります。それぞれ別物ではなく、<strong>1つのアカウントで全部使える</strong>と考えてOKです。</p>
     <div class="grid2">
       <div class="grid2__item">
         <h4>① Claude.ai（チャット版）</h4>
-        <p>ブラウザで開く、いちばん基本の窓口。Projects・Artifacts などの機能はここに乗っている。STAGE 02 の主役。</p>
+        <p>ブラウザで開く、いちばん基本の窓口。Projects・Artifacts などの機能はここに乗っている。STAGE 01 で習熟する基盤。</p>
       </div>
       <div class="grid2__item">
-        <h4>② Claude Code（CLI・IDE版）</h4>
+        <h4>② Claude Cowork（デスクトップ）</h4>
+        <p>Claude Desktop アプリの「Cowork」タブで動く、自律エージェント型の専用ツール。PC内の作業を任せられる「AI同僚」。STAGE 02 で扱います。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ Claude Design（claude.ai/design）</h4>
+        <p>ビジュアル制作専用のブラウザツール。スライド・通信・ポスターをキャンバス上で対話的に組み上げる。STAGE 02 のもう一つの主役。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ Claude Code（CLI・IDE版）</h4>
         <p>ターミナルや Cursor のようなエディタの中に住む Claude。ファイル操作・自動化・コード生成が得意。STAGE 03 の主役。</p>
       </div>
       <div class="grid2__item">
-        <h4>③ Claude API（呼び出し版）</h4>
+        <h4>⑤ Claude API（呼び出し版）</h4>
         <p>自作のアプリやGoogle Apps Scriptから Claude を呼び出す入り口。今回は触りだけ。Pro契約とは別料金。</p>
       </div>
       <div class="grid2__item">
-        <h4>④ Claude モバイル版</h4>
+        <h4>⑥ Claude モバイル版</h4>
         <p>スマホアプリ。通勤中・会議の合間に「ちょっと聞く」のに便利。本講座では補助的に扱います。</p>
       </div>
     </div>
@@ -702,273 +710,336 @@ body.is-unlocked #site{display:block}
 <section id="stage-02" class="stage">
   <div class="stage__cover">
     <div class="stage__num">STAGE 02 — 基本</div>
-    <h2 class="stage__title">Cowork &amp; Design で日常業務を加速</h2>
-    <p class="stage__lead">ここからは手を動かします。Claudeを「単発のチャット相手」から「資料を一緒に持ち、成果物を一緒に作る同僚」に格上げしていきます。キーワードは <strong>Cowork</strong>（協働）と <strong>Design</strong>（生成）です。このSTAGEを通すと、ブラウザ版Claude.aiだけで、所見・通信・スライドのほとんどが回せるようになります。</p>
+    <h2 class="stage__title">Claude Cowork × Claude Design ── 2大ツールを完全解説</h2>
+    <p class="stage__lead">2026年に入って、Claudeにはふだんのチャットとは別に、専用ツールが2つ追加されました。<strong>Claude Cowork</strong>（あなたのPCで自律的に仕事を進める「AI同僚」）と <strong>Claude Design</strong>（スライドや通信物をブラウザで一緒に組み上げる制作キャンバス）です。STAGE 02 では、起動の仕方から教師目線の使いどころ、安全な運用ルールまでを、2つのツールごとに完全解説します。</p>
     <ul class="stage__toc">
-      <li><a href="#s2-1">2-1. Cowork①：Projectsで「資料を持たせる」</a></li>
-      <li><a href="#s2-2">2-2. Cowork②：Artifactsで「一緒に作る」</a></li>
-      <li><a href="#s2-3">2-3. Design①：学級通信を作るレシピ</a></li>
-      <li><a href="#s2-4">2-4. Design②：スライド・ポスター・掲示物</a></li>
-      <li><a href="#s2-5">2-5. プロンプト設計の型（4要素）</a></li>
+      <li><a href="#s2-1">2-1. 全体像：Chat / Cowork / Design の3つの動かし方</a></li>
+      <li><a href="#s2-2">2-2. Claude Cowork ① 起動と最初のタスク</a></li>
+      <li><a href="#s2-3">2-3. Claude Cowork ② コネクター・スキル・Scheduled</a></li>
+      <li><a href="#s2-4">2-4. Claude Design ① 起動と編集UIの全体像</a></li>
+      <li><a href="#s2-5">2-5. Claude Design ② 教師の現場で使う5レシピ</a></li>
     </ul>
   </div>
 
   <article id="s2-1" class="lesson">
     <div class="lesson__head">
       <span class="lesson__no">2-1</span>
-      <h3>Cowork①：Projectsで「資料を持たせる」</h3>
+      <h3>全体像：Chat / Cowork / Design の3つの動かし方</h3>
     </div>
-    <p><strong>Projects</strong> は、Claudeに「<strong>毎回読み直してほしい資料</strong>」と「<strong>毎回守ってほしいルール</strong>」をあらかじめ預けておく機能です。チャットを開くたびに資料を貼り直す手間が消え、Claudeが「あの単元の担当」「あの学級の担任の相棒」になっていきます。</p>
+    <p>2026年現在、Claude には大きく <strong>3つの動かし方</strong> があります。STAGE 01 で触れた「<strong>Chat（チャット）</strong>」のほかに、PC上の作業を任せられる「<strong>Claude Cowork</strong>」と、ビジュアル制作に特化した「<strong>Claude Design</strong>」が並んでいる、という構図です。同じ Claude というブレインを、用途別に違う窓口から呼び出している、と捉えるのが分かりやすい。</p>
 
-    <div class="scope">
-      <div class="scope__col">
-        <div class="scope__head">
-          <span class="scope__tag">K</span>
-          <h4>Knowledge（持たせる資料）</h4>
-        </div>
-        <p class="scope__where">置けるもの：PDF・Word・テキスト・画像</p>
-        <p>学年の年間指導計画、学級経営案、教科書PDF、校内研究の冊子、校務分掌資料など。<strong>毎回参照したい背景情報</strong>を放り込みます。容量制限はProプランで十分すぎるレベル。</p>
-      </div>
-      <div class="scope__col">
-        <div class="scope__head">
-          <span class="scope__tag">I</span>
-          <h4>Instructions（守らせるルール）</h4>
-        </div>
-        <p class="scope__where">置けるもの：自由記述の指示文</p>
-        <p>「ですます調で」「個人名は出さない」「3文以内で」「最後に振り返り用の問いを1つ添える」など、<strong>毎回守ってほしい型</strong>を文章で書きます。1000字程度でも問題なく機能します。</p>
-      </div>
-    </div>
+    <table class="compare">
+      <thead>
+        <tr><th>項目</th><th>Chat</th><th>Claude Cowork</th><th>Claude Design</th></tr>
+      </thead>
+      <tbody>
+        <tr><td data-th="ひとことで">ひとことで</td><td data-th="Chat">壁打ちと下書き</td><td data-th="Cowork">PC内の作業を任せる同僚</td><td data-th="Design">資料・スライドの制作キャンバス</td></tr>
+        <tr><td data-th="どこで動く">どこで動く</td><td data-th="Chat">claude.ai（ブラウザ）</td><td data-th="Cowork">Claude Desktop（Win/Mac アプリ）</td><td data-th="Design">claude.ai/design（ブラウザ）</td></tr>
+        <tr><td data-th="役割">役割</td><td data-th="Chat">考える・書く相手</td><td data-th="Cowork">手を動かす同僚</td><td data-th="Design">一緒に絵を描く相棒</td></tr>
+        <tr><td data-th="得意なこと">得意なこと</td><td data-th="Chat">所見・思考整理・要約</td><td data-th="Cowork">ファイル整理・PDF処理・メール下書き・反復作業</td><td data-th="Design">スライド・通信レイアウト・ポスター・モックアップ</td></tr>
+        <tr><td data-th="必要プラン">必要プラン</td><td data-th="Chat">無料〜（Pro推奨）</td><td data-th="Cowork" class="good">Pro / Max / Team / Enterprise</td><td data-th="Design" class="good">Pro / Max / Team / Enterprise（研究プレビュー）</td></tr>
+        <tr><td data-th="教師の代表用途">教師の代表用途</td><td data-th="Chat">所見・通信文の下書き</td><td data-th="Cowork">大量写真の仕分け／週末の連絡帳まとめ</td><td data-th="Design">学級通信レイアウト／授業スライド10枚</td></tr>
+      </tbody>
+    </table>
 
-    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">Projects を作る5ステップ</h4>
-    <div class="steps">
-      <div class="step">
-        <h4>左サイドバーから「Projects」を開く</h4>
-        <p>Claude.ai の左メニューに「Projects」があります。「+ New Project」をクリック。</p>
-      </div>
-      <div class="step">
-        <h4>名前と説明をつける</h4>
-        <p>例：「5年算数 単元計画」「3組 学級通信」「個別の支援計画 担当児」。説明欄には「このProjectで何をするか」を1〜2文で書きます。</p>
-      </div>
-      <div class="step">
-        <h4>Knowledge にファイルを追加</h4>
-        <p>教科書PDF、指導要領該当部分、年間指導計画、前年度の通信、自分の所見の見本ファイルなど。「<strong>毎回読み返してほしいもの</strong>」を厳選して入れます。多すぎると逆に精度が落ちるので、5〜10ファイル程度が目安。</p>
-        <span class="hint">児童名や個人情報を含むファイルは絶対に入れない。仮名化したコピーを別途用意してから入れる。</span>
-      </div>
-      <div class="step">
-        <h4>Instructions に「守らせるルール」を書く</h4>
-        <p>文体・字数・避けたい表現・最終形のイメージなどを文章で。「<strong>ですます調・3文以内・否定形を使わない・最後に保護者への一言</strong>」のように具体的に。</p>
-      </div>
-      <div class="step">
-        <h4>新規チャットを開いて試運転</h4>
-        <p>Project内で新規チャットを開き、いつもの依頼を投げてみる。応答がInstructionsに沿っているかを確認。ズレていたらInstructionsを直して再試行。最初の数回は「<strong>Instructionsの調整</strong>」が中心の作業になります。</p>
-      </div>
+    <p>本STAGEでは <strong>Cowork → Design</strong> の順に解説します。先に道具の重い方（Cowork）から触っておくと、Design がいかに気軽に使えるかが体感できるからです。3つはすべて<strong>同じClaudeアカウント</strong>でログインし、プランも共有なので、Pro 1本契約で全部使えます。</p>
+
+    <div class="flowchart">
+      <div class="flowchart__node">Chat<br/><span>考える・書く</span></div>
+      <div class="flowchart__arrow">→</div>
+      <div class="flowchart__node">Cowork<br/><span>手を動かす</span></div>
+      <div class="flowchart__arrow">→</div>
+      <div class="flowchart__node">Design<br/><span>形にする</span></div>
     </div>
 
-    <div class="callout good">
-      <div class="callout__label">最初に作るべき Project 5選</div>
-      <p>① <strong>学級経営Project</strong>（年間目標・児童像・学級ルール）<br/>
-      ② <strong>通知表Project</strong>（観点メモ→所見化）<br/>
-      ③ <strong>学級通信Project</strong>（過去の通信を読ませて文体を継承）<br/>
-      ④ <strong>単元計画Project</strong>（教科×学年・教科書PDFと指導要領）<br/>
-      ⑤ <strong>個別支援Project</strong>（仮名化した支援計画の型・配慮事項）</p>
+    <div class="callout">
+      <div class="callout__label">先生にとっての位置づけ</div>
+      <p>朝の打ち合わせ前の<strong>5分思考整理</strong>はChat、放課後の<strong>「これ全部やっといて」</strong>はCowork、研究授業前の<strong>「スライド10枚揃えて」</strong>はDesign。3つの窓口を持っておくだけで、1日の中で「Claudeに任せられる場面」が一気に増えます。</p>
     </div>
-
-    <p>Instructions の書き方が一番のキモです。下に教員向けのサンプルを置いておきます。コピペして自分流に調整してみてください。</p>
-
-    <pre><code>【役割】
-あなたは小学校5年担任の補助役です。
-丁寧で、慎重で、子どもと保護者の両方に配慮できる同僚として動いてください。
-
-【出力ルール（全チャット共通）】
-- 文体：ですます調
-- 個人名・住所・連絡先は絶対に書かない（仮名はA児・B児で受ける）
-- 否定形・断定的な評価は避ける
-- 「がんばる」「努力する」は所見では使わない
-- 不明点があれば、勝手に補完せず必ず質問する
-
-【参照優先度】
-1. Knowledge にある学年指導計画
-2. Knowledge にある学校の文書フォーマット
-3. それ以外は一般的な小学校教育の文脈で判断
-
-【出力の最後に】
-- 「確認したい点」があれば箇条書きで添える</code></pre>
   </article>
 
   <article id="s2-2" class="lesson">
     <div class="lesson__head">
       <span class="lesson__no">2-2</span>
-      <h3>Cowork②：Artifactsで「一緒に作る」</h3>
+      <h3>Claude Cowork ① ── 起動と最初のタスク</h3>
     </div>
-    <p><strong>Artifacts</strong> は、Claudeの返事のうち「成果物」と呼べる部分を、チャット画面の右側に専用の作業エリアとして開いてくれる機能です。テキスト・コード・HTML・スライド構成案など、生成物がその場でプレビュー＆編集できる「<strong>制作キャンバス</strong>」になります。</p>
+    <p><strong>Claude Cowork</strong> は、あなたのPCの中で自律的に作業を進める「<strong>AI同僚</strong>」です。これまでのチャットは「指示を投げる→返事をもらう」が基本でしたが、Coworkは「<strong>やりたい結果を伝える → Claudeが計画を立てる → ファイル操作・ブラウザ操作・複数ステップを自分で実行 → 完了報告</strong>」までを一気通貫で進めます。Anthropicが2026年1月に発表し、2月のアップデートで <strong>Pro / Max / Team / Enterprise の全有料プラン</strong>から使えるようになりました。</p>
 
-    <div class="flowchart">
-      <div class="flowchart__node">下書きを依頼<br/><span>「学級通信のひな型作って」</span></div>
-      <div class="flowchart__arrow">→</div>
-      <div class="flowchart__node">Artifactsに出力<br/><span>右側に成果物が表示</span></div>
-      <div class="flowchart__arrow">→</div>
-      <div class="flowchart__node">部分修正を依頼<br/><span>「冒頭をやわらかく」</span></div>
-      <div class="flowchart__arrow">→</div>
-      <div class="flowchart__node">完成版を保存<br/><span>コピーまたはダウンロード</span></div>
+    <div class="callout warn">
+      <div class="callout__label">前提：デスクトップアプリが必須</div>
+      <p>Coworkは<strong>ブラウザ版（claude.ai）では動きません</strong>。Windows / Mac 用の <strong>Claude Desktop アプリ</strong>をインストールしたうえで使います。ファイル操作やブラウザ自動化を行うため、PCへの常駐が必要だからです。</p>
     </div>
 
-    <p>大事なのは、<strong>「最初から完璧を狙わない」</strong>こと。Claudeに6割の下書きを出してもらい、「ここはやわらかく」「この段落は削って」「最後に保護者への一言を足して」と、対話で少しずつ完成形に近づけます。これが <strong>Cowork（協働）</strong> の感覚です。</p>
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">起動までの5ステップ</h4>
+    <div class="steps">
+      <div class="step">
+        <h4>Claude Desktop をインストール</h4>
+        <p>ブラウザで <code>claude.ai/download</code> を開き、Windowsなら <code>.exe</code>、Macなら <code>.dmg</code> をダウンロード。指示通りにインストール。</p>
+        <span class="hint">校務PCに入れる前に、必ず情報セキュリティポリシーを確認。判断に迷うときは管理職と情報担当に相談してください。私物PCで動かすのが現実的な場合もあります。</span>
+      </div>
+      <div class="step">
+        <h4>起動して Pro プラン以上のアカウントでログイン</h4>
+        <p>初回起動時に「<em>Setting up Claude's workspace</em>」と出てしばらく待ちます（最新版に更新する処理）。終わるとメイン画面が開きます。</p>
+      </div>
+      <div class="step">
+        <h4>画面上部の「Cowork」タブをクリック</h4>
+        <p>Claude Desktopには「<strong>Chat</strong>」タブと「<strong>Cowork</strong>」タブが並んでいます。<strong>Cowork タブをクリックすると「Tasks」モード</strong>に切り替わり、左サイドバーに「Tasks」「Scheduled」「Projects」などのメニューが表示されます。</p>
+      </div>
+      <div class="step">
+        <h4>「+ New Task」で最初のタスクを作る</h4>
+        <p>左上の「+ New Task」をクリックし、依頼を文章で書きます。たとえば <em>「ダウンロードフォルダの中の画像を、撮影日ごとにフォルダ分けして」</em>。難しい書き方は不要、ふだん同僚に頼むのと同じ語り口でOK。</p>
+      </div>
+      <div class="step">
+        <h4>計画（Plan）を確認 → 承認 → 実行を見守る</h4>
+        <p>Coworkはまず<strong>実行計画</strong>を提示してきます。「① ダウンロードフォルダを読み取る → ② 画像のメタデータから日付を取得 → ③ 日付フォルダを作成 → ④ 画像を移動」のように。<strong>承認するまで実行は始まりません</strong>。問題なければ「Approve（承認）」を押して実行スタート。途中の重要ステップでは、もう一度確認を求めてくることもあります。</p>
+      </div>
+    </div>
 
     <div class="dialog">
-      <div class="dialog__line you">来週の学級通信のひな型を作って。テーマは「校外学習の振り返り」。A4一枚、見出し3つ、最後に保護者へのお願いを1段落。</div>
-      <div class="dialog__line ai">了解しました。下書きをArtifactsに出します。トーンは「ですます調・やわらかめ」で良いですか？ また、写真の差込位置を本文中に明示しておくのも便利です。</div>
-      <div class="dialog__line you">はい。写真は3カ所に目印を入れて。「学年集会の様子」「お弁当の時間」「帰りのバスでの一言」あたり。</div>
-      <div class="dialog__line ai">承知しました。それでは生成します。</div>
+      <div class="dialog__line you">来週の校外学習で撮った写真フォルダを整理して。重複は1枚残して、ピンボケは「ボツ候補」フォルダに分けて。</div>
+      <div class="dialog__line ai">承知しました。以下の手順で進めます：① 対象フォルダ内の画像をスキャン（約340枚）／② 重複検出（ファイル名・サイズ・ハッシュで判定）／③ ピンボケ判定（ラプラシアン分散）／④「採用」「重複_アーカイブ」「ボツ候補」の3フォルダに振り分け。実行してよろしいですか？</div>
+      <div class="dialog__line you">OK、進めて。ボツ候補は私がもう一度目視で確認するから、削除はしないで。</div>
+      <div class="dialog__line ai">了解しました。削除は行いません。実行を開始します。完了後にレポートを表示します。</div>
     </div>
 
-    <div class="callout">
-      <div class="callout__label">Coworkの極意</div>
-      <p>Claudeに丸投げするのではなく、「<strong>判断は自分、清書はClaude</strong>」と分担を決めること。先生の仕事の「<strong>何を書くか</strong>」は人にしか決められませんが、「<strong>どう書くか</strong>」はClaudeが圧倒的に速いです。先生はディレクター、Claudeは熟練のライター・デザイナー、というポジション分担。</p>
-    </div>
+    <p>Chatと決定的に違うのは、<strong>「依頼すれば、Claudeが自分で手を動かす」</strong>ところ。先生は「<strong>何を、どうしてほしいか</strong>」を伝えるだけで、ファイル操作や繰り返し作業はすべてCoworkが引き受けます。研究授業の準備、運動会の写真整理、所見メモの仕分け── 1人で抱えていた「単純作業の山」が、相談相手を得て一気に片付きます。</p>
 
-    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">Artifactsで出せる成果物の種類</h4>
-    <ul class="bulleted">
-      <li><strong>テキスト</strong>：所見、通信本文、お便り、メール下書き、原稿</li>
-      <li><strong>Markdown</strong>：単元計画、指導案、研究授業の構想</li>
-      <li><strong>HTML</strong>：学級通信レイアウト、ポスター、スライド、インタラクティブ教材</li>
-      <li><strong>SVG画像</strong>：簡単な図解・板書のイメージ・座席表</li>
-      <li><strong>コード（JavaScript等）</strong>：簡易な算数ツール、フラッシュカード、計算問題ジェネレータ</li>
-      <li><strong>Mermaid図</strong>：単元の構造図、人物相関図、フローチャート</li>
-    </ul>
+    <div class="callout good">
+      <div class="callout__label">最初に試すべきタスク 5選</div>
+      <p>① <strong>校外学習の写真整理</strong>（重複削除・日付フォルダ化）<br/>
+      ② <strong>連絡帳メモの仕分け</strong>（テキスト束を子どもごとにファイル分割）<br/>
+      ③ <strong>研究授業のPDF束を要約</strong>（複数PDFから論点だけ抜き出してメモ化）<br/>
+      ④ <strong>領収書の写真からCSV作成</strong>（出張・教材購入の表計算化）<br/>
+      ⑤ <strong>過去の通信12号を読んで「文体マニュアル」を作る</strong>（自分のクセを抽出）</p>
+    </div>
   </article>
 
   <article id="s2-3" class="lesson">
     <div class="lesson__head">
       <span class="lesson__no">2-3</span>
-      <h3>Design①：学級通信を作るレシピ</h3>
+      <h3>Claude Cowork ② ── コネクター・スキル・Scheduled</h3>
     </div>
-    <p>具体例として、学級通信を1本作ってみましょう。下のプロンプトをそのままコピーして、自分の学級に合わせて差し替えて使えます。</p>
+    <p>Coworkが真価を発揮するのは、<strong>外部サービスや繰り返し作業</strong>とつなげたとき。ここで覚える要素は3つだけです。</p>
 
-    <pre><code>【依頼】
-A4一枚、横書き、学級通信のHTMLを作って。
-
-【学級】
-小学5年3組（仮）／担任：（自分の名前）
-
-【今回のテーマ】
-校外学習「江戸東京たてもの園」の振り返り
-
-【構成】
-1) タイトル＋号数（第○号）＋日付＋発行者
-2) 見出し1：「学びの場が変わると、見え方も変わる」
-   本文：当日の様子（学習班の動き、子どもの感想を2人ぶん）
-3) 見出し2：「子どもが見つけた『なぜ？』」
-   本文：実物に触れたことで生まれた問い、これからの学習に繋げる視点
-4) 見出し3：「ご家庭から、ぜひ一言を」
-   本文：振り返りカードへの保護者コメントのお願い
-5) フッター：次回行事の予告、保護者への一文
-
-【デザイン】
-- 暖色系（オレンジ・クリーム）／丸ゴシック／余白多め
-- 写真スペース3カ所（margin で枠を確保）
-- 印刷向けCSS（@media print 対応）
-- フォントは Noto Sans JP
-
-【ルール】
-- 児童の実名は使わない（A児・B児・C児）
-- 文体はですます調、やわらかめ
-- 1段落は3〜4文以内</code></pre>
-
-    <p>このプロンプトを Project内のチャットに貼れば、ArtifactsにHTMLが出力されます。プレビューを見ながら「<strong>もう少し色をやわらかく</strong>」「<strong>2つ目の見出しを別の表現に</strong>」と対話で詰めていきます。20分もあれば1枚仕上がります。</p>
-
-    <div class="callout">
-      <div class="callout__label">デザイン指示のコツ</div>
-      <p>「かわいい感じで」より、「<strong>暖色系（オレンジ・黄色）・丸ゴシック・余白多め・写真3枚分のスペース</strong>」のように、視覚要素を具体的な言葉に分解して渡します。Claudeはここまで明示するとほぼ一発で形にしてきます。HTMLとCSSの語彙（grid・flex・border-radius・shadow など）が分かれば指示の精度はさらに上がりますが、知らなくてもOK。</p>
+    <div class="scope">
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">C</span>
+          <h4>Connectors（コネクター）</h4>
+        </div>
+        <p class="scope__where">設定場所：左サイドバー → Settings → Connectors</p>
+        <p>Coworkが触れる<strong>外部サービス</strong>を有効化する場所。代表は <strong>Gmail</strong>（メール下書き／受信箱の整理）、<strong>Google Drive</strong>（ファイル参照／保存）、<strong>Google Calendar</strong>（予定参照）、<strong>Chrome</strong>（ブラウザ自動化）。<br/>初回はOAuth認証が走り、<strong>許可した範囲だけ</strong>Coworkが触れます。学校アカウントを連携する場合は、教育委員会・学校のポリシーを必ず確認。</p>
+      </div>
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">S</span>
+          <h4>Skills（スキル）</h4>
+        </div>
+        <p class="scope__where">設定場所：左サイドバー → Skills</p>
+        <p>Coworkに「<strong>こういう手順で動いてね</strong>」を覚えさせるパッケージ。Anthropic公式の「<strong>PDF操作</strong>」「<strong>サブエージェント協調（複数ワークフロー並行処理）</strong>」などの組み込みスキルがあり、自分専用のスキルを書き足すこともできます（STAGE 03 で扱う Claude Code の Skill と同じ思想）。</p>
+      </div>
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">⏱</span>
+          <h4>Scheduled（スケジュール）</h4>
+        </div>
+        <p class="scope__where">設定場所：左サイドバー → Scheduled</p>
+        <p>「<strong>毎週月曜の朝に、先週の連絡帳をまとめてDriveに保存</strong>」のような<strong>定期タスク</strong>を仕込む場所。Cron形式の知識は不要、「毎週月曜 7:30」のような自然な指定でOK。先生が忘れていてもCoworkが勝手に走り、結果をホーム画面に届けてくれます。</p>
+      </div>
     </div>
 
-    <p>仕上がったHTMLは、Artifactsの右上にある「コピー」「ダウンロード」から保存。ローカルの <code>.html</code> ファイルとして開き、ブラウザで印刷すれば紙の通信になります。Wordや一太郎を経由する必要はありません。</p>
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">教師の業務に当てはめた4つの実例</h4>
+
+    <div class="grid2">
+      <div class="grid2__item">
+        <h4>① 月曜朝の「先週ふりかえり」自動生成</h4>
+        <p><strong>Connector</strong>：Gmail（保護者連絡）＋ Drive（学級日誌）／<strong>Schedule</strong>：毎週月曜 7:00<br/>
+        先週分の保護者連絡・学級日誌・出欠記録を読み、A4一枚の振り返りメモをDrive内に自動保存。職員朝会で配れる状態を、月曜の朝には作っておいてくれる。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>② 行事終了後の「写真→保護者報告」一気通貫</h4>
+        <p><strong>Connector</strong>：Drive（写真フォルダ）＋ Gmail（テンプレ下書き）<br/>
+        行事フォルダの写真を整理してベスト10枚を選定。保護者向けの簡易報告メールの下書きまでGmailに作成して停止。<strong>送信は先生が確認してから手動で</strong>。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>③ 経費精算の「写真→CSV」変換</h4>
+        <p><strong>Skill</strong>：PDF/画像 OCR（組み込み）<br/>
+        スマホで撮った領収書写真の束をフォルダごと渡すと、日付・金額・店名を読み取って CSV にまとめてくれる。校務支援システムへ貼り付けるだけの状態に。</p>
+      </div>
+      <div class="grid2__item">
+        <h4>④ 校内研究の「冊子→質問応答ボット」化</h4>
+        <p><strong>Skill</strong>：PDF操作 ＋ <strong>Project機能</strong>（Cowork内）<br/>
+        研究紀要のPDFをCoworkのProjectに登録。「あの引用、どこに書いてあった？」と聞くと、ページ番号付きで即返答。職員室の本棚を頭に入れた相棒に。</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout__label">必ず守る安全運用ルール</div>
+      <p>① <strong>個人情報を含むファイルやフォルダはCoworkに渡さない</strong>（仮名化したコピーを別途用意）<br/>
+      ② <strong>「削除」「上書き」「送信」など、戻せない操作は必ず確認モードで</strong>。「削除はしないで」と前置きすれば守ってくれる<br/>
+      ③ <strong>Webから読み込ませる文書は内容を確認</strong>。第三者が仕込んだ「Claudeへの指示文」が混ざる<strong>プロンプトインジェクション</strong>のリスクがあるため<br/>
+      ④ <strong>校務PCで使う前に情報セキュリティポリシーを必ず確認</strong>。私物PCで生成 → 出力ファイルだけ持ち込み、という運用も現実解</p>
+    </div>
+
+    <p>Coworkは便利な分、<strong>「自分でできることの範囲」が広い</strong>ツールです。Chatとは違い、勝手にファイルを動かしたりメールを下書きしたりできるので、最初の数日は<strong>「確認モード」で動かして、Coworkの動きの癖を体感してから自動化を広げていく</strong>のが安全です。</p>
   </article>
 
   <article id="s2-4" class="lesson">
     <div class="lesson__head">
       <span class="lesson__no">2-4</span>
-      <h3>Design②：スライド・ポスター・掲示物</h3>
+      <h3>Claude Design ① ── 起動と編集UIの全体像</h3>
     </div>
-    <p>Artifacts に HTML を吐かせると、その場でブラウザ表示されます。<strong>実際に動くスライドや、印刷できるレイアウト</strong>が、コードを書かずに手に入ります。先生の現場で効くのはこの4つです。</p>
+    <p><strong>Claude Design</strong> は、Anthropic Labs が2026年4月にリリースした<strong>ビジュアル制作専用ツール</strong>です。Claudeの最新ビジョンモデル「Opus 4.7」が裏で動いていて、テキストの指示と素材を渡すだけで、<strong>授業スライド・学級通信・行事ポスター・ワンペーパー・インタラクティブ教材</strong>などをブラウザ内で対話的に組み上げられます。研究プレビュー段階ですが、<strong>Pro / Max / Team / Enterprise</strong> の有料プランで使えます（Enterpriseは組織管理者の有効化が必要）。</p>
 
-    <div class="grid2">
-      <div class="grid2__item">
-        <h4>授業スライド（HTML一枚物）</h4>
-        <p>矢印キーで進む、横スクロール型のスライド。導入→展開→まとめ。教室の電子黒板にそのまま投影。PowerPoint不要。</p>
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">起動から初稿までの4ステップ</h4>
+    <div class="steps">
+      <div class="step">
+        <h4>ブラウザで <code>claude.ai/design</code> にアクセス</h4>
+        <p>普段の Claude.ai と同じアカウントでログイン。Coworkと違って<strong>アプリのインストール不要</strong>。学校・自宅・出張先、どのPCからでも開けます。タブレットでも一応動きますが、編集はPCの方が圧倒的に楽。</p>
       </div>
-      <div class="grid2__item">
-        <h4>行事ポスター</h4>
-        <p>運動会・学習発表会・PTA行事の案内デザイン。日時・場所・対象が大きく、画像枠が確保された印刷用レイアウト。</p>
+      <div class="step">
+        <h4>「+ New Design」で目的を伝える</h4>
+        <p>左上の「+ New Design」を押し、何を作りたいかを文章で書きます。<em>「小学校5年・社会科『日本の工業』導入スライドを作って。10枚構成、黒板で見やすい配色」</em> のように。<br/>
+        必要なら、<strong>画像／DOCX／PPTX／XLSX</strong> をその場でアップロードできます。「<strong>Web Capture</strong>」を使えば、自治体のサイトや既存資料の画面を切り取って参照素材にすることも。</p>
       </div>
-      <div class="grid2__item">
-        <h4>掲示物</h4>
-        <p>給食目標・係活動・誕生日カードのテンプレ。色違い・サイズ違いを大量に展開できる。</p>
+      <div class="step">
+        <h4>キャンバスに初稿が並ぶ</h4>
+        <p>数十秒で、画面右側のキャンバスに<strong>初稿</strong>が並びます。チャットの Artifacts と違うのは、<strong>1枚ものではなく複数ページが束で</strong>並ぶこと。スライド10枚・ワンペーパー3枚・ポスター1枚── 「成果物のセット」がいきなり目の前に立ち上がります。</p>
       </div>
-      <div class="grid2__item">
-        <h4>インタラクティブ教材</h4>
-        <p>算数の図形パズル、漢字フラッシュカード、九九タイマー。JavaScript込みで動く教材を、対話で作れる。</p>
+      <div class="step">
+        <h4>3つの編集UIで仕上げる</h4>
+        <p>初稿を<strong>対話だけで詰める</strong>のではなく、Designでは<strong>キャンバス上で直接いじれる</strong>のが特徴。次の3つのUIを覚えれば十分です（下に詳細）。</p>
       </div>
     </div>
 
-    <pre><code>【プロンプト例：社会科の導入スライド】
-小学校5年の社会科「日本の工業」導入スライドを作って。
-構成：
-1) タイトル（青系・大きな見出し）
-2) 全国の工業地帯マップ（仮の枠でOK、後で画像を差し替える）
-3) 児童への問い「なぜここに工業が集まる？」
-4) 今日のめあて
+    <div class="scope">
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">A</span>
+          <h4>インラインコメント</h4>
+        </div>
+        <p>気になる箇所を選択して、<strong>「もう少し優しい印象に」「2行に収めて」</strong> のように吹き出しでコメント。Claudeがその要素だけを直してくれます。授業者目線で「ここの言葉が硬い」を直接指摘できる感覚。</p>
+      </div>
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">B</span>
+          <h4>テキスト直接編集</h4>
+        </div>
+        <p>見出しや本文をダブルクリックすると、その場で書き換え可能。「先生が手を入れたい固有名詞・学校名・日付」だけを<strong>直に修正</strong>できる。Wordのように普通に打ち直せる感覚で、Claudeを介さない作業も自然に混ぜられる。</p>
+      </div>
+      <div class="scope__col">
+        <div class="scope__head">
+          <span class="scope__tag">C</span>
+          <h4>調整ノブ（Knobs）</h4>
+        </div>
+        <p>選択した要素の<strong>色・余白・フォントサイズ・角丸</strong>などを、スライダーやカラーピッカーで微調整。<strong>「全ページに適用」ボタン</strong>を押せば、変更が束ねたデザイン全体に一括反映。手で全ページ直す必要がない。</p>
+      </div>
+    </div>
 
-仕様：
-- HTML一枚で、矢印キーで進む形式
-- 各スライドは中央寄せ、フォントは大きめ
-- 黒板で見やすいよう、背景は白、文字は濃紺
-- フッターに「5年〇組／第○時」</code></pre>
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">出来上がりの書き出し方</h4>
+    <table class="compare">
+      <thead><tr><th>形式</th><th>用途</th><th>教師の代表場面</th></tr></thead>
+      <tbody>
+        <tr><td data-th="形式">PDF</td><td data-th="用途">配布・印刷</td><td data-th="場面" class="good">学級通信・ポスター・配布物</td></tr>
+        <tr><td data-th="形式">PPTX（PowerPoint）</td><td data-th="用途">編集可能なスライド</td><td data-th="場面" class="good">研究授業の指導案配布／学校で再編集</td></tr>
+        <tr><td data-th="形式">スタンドアロンHTML</td><td data-th="用途">電子黒板で投影</td><td data-th="場面" class="good">授業スライド・インタラクティブ教材</td></tr>
+        <tr><td data-th="形式">Canva連携</td><td data-th="用途">仕上げをCanvaで</td><td data-th="場面">学校でCanva文化があるならこちら</td></tr>
+        <tr><td data-th="形式">URL共有</td><td data-th="用途">同僚に見せる</td><td data-th="場面">学年団に「こんなイメージ」を共有</td></tr>
+      </tbody>
+    </table>
 
-    <p>こうした指示で、その場で動くスライドが生成されます。出てきたHTMLは <code>.html</code> として保存すれば、職員室PCでもタブレットでも開けます。研究授業の準備時間が一気に短くなります。</p>
+    <div class="callout">
+      <div class="callout__label">Chat の Artifacts との違い</div>
+      <p>STAGE 01 までで触れた <strong>Artifacts</strong> は、<strong>1枚もの</strong>をChatの右側にプレビューする機能。Designは <strong>複数ページの束</strong>を専用キャンバスで仕上げる独立ツール。「<strong>1枚の通信＝Chat の Artifacts／10枚のスライド＝Claude Design</strong>」と覚えると使い分けが効きます。研究授業のように「束で必要」なときはDesign一択。</p>
+    </div>
 
     <div class="callout warn">
       <div class="callout__label">校務PCで使うときの注意</div>
-      <p>校務PCで Claude を使う場合、自治体・学校で利用ルールが異なります。情報セキュリティポリシーを確認のうえ、許可された範囲で利用してください。判断に迷うときは、管理職と情報担当に相談を。生成だけは私物PCで行い、出力ファイルだけ校務PCに持ち込む、という運用も現実解の一つです。</p>
+      <p>校務PCでClaudeを使う場合、自治体・学校で利用ルールが異なります。情報セキュリティポリシーを確認のうえ、許可された範囲で利用してください。判断に迷うときは、管理職と情報担当に相談を。<strong>生成は私物PCで、出力ファイルだけ校務PCに持ち込む</strong>運用も現実解の一つです。</p>
     </div>
   </article>
 
   <article id="s2-5" class="lesson">
     <div class="lesson__head">
       <span class="lesson__no">2-5</span>
-      <h3>プロンプト設計の型（4要素）</h3>
+      <h3>Claude Design ② ── 教師の現場で使う5レシピ</h3>
     </div>
-    <p>STAGE 02 の最後に、すべての依頼に共通する「<strong>プロンプトの型</strong>」を渡しておきます。この型を覚えると、思い通りの出力が一発で返ってくる確率が劇的に上がります。</p>
+    <p>Designに渡す指示文は、<strong>【目的】【受け手】【構成】【デザイン】【ルール】</strong>の5項目を埋めるとほぼ一発で形になります。下に、教師の業務でそのまま使える<strong>5つのレシピ</strong>を置いておきます。コピーして、〇〇の部分を自分の学級に書き換えれば動きます。</p>
 
-    <pre><code>【役割】
-あなたは〇〇の補助役です。
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">レシピ① ── 学級通信（A4一枚）</h4>
+    <pre><code>【目的】学級通信「校外学習・江戸東京たてもの園 振り返り」
+【受け手】保護者
+【構成】
+- タイトル＋号数＋日付＋発行者
+- 見出し1：学びの場が変わると、見え方も変わる
+- 見出し2：子どもが見つけた「なぜ？」
+- 見出し3：ご家庭から、ぜひ一言を
+- フッター：次回行事の予告
+【デザイン】A4縦／暖色系（オレンジ＋クリーム）／丸ゴシック／余白多め／写真スペース3カ所
+【ルール】児童名は仮名（A児・B児）／文体ですます調・やわらかめ／1段落3〜4文以内</code></pre>
 
-【入力】
-- これから渡す情報：（テーマ・データ・観点）
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">レシピ② ── 授業スライド（10枚構成）</h4>
+    <pre><code>【目的】小5社会「日本の工業」導入スライド10枚
+【受け手】小学校5年（特別支援学級併設）
+【構成】
+1. タイトル
+2. 既習の確認（前単元への接続）
+3. 本時のめあて
+4-7. 全国の工業地帯マップ → 問い → 子どもの予想欄 → 実例写真
+8. 中心発問「なぜここに工業が集まる？」
+9. ペア対話の枠
+10. 振り返りカード
+【デザイン】黒板で見やすい白背景／文字は濃紺／フォント大きめ／フッターに「5年〇組／第〇時」
+【ルール】1スライドの文字は60字以内／漢字にはルビ枠</code></pre>
 
-【出力ルール】
-- 文体：（ですます調 / である調 / 砕けた口調）
-- 形式：（HTML / Markdown / プレーンテキスト）
-- 字数：（120字以内 / 3文以内 / A4一枚）
-- 避ける表現：（否定形 / 断定的な評価 / カタカナ語）
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">レシピ③ ── 行事ポスター（A3）</h4>
+    <pre><code>【目的】運動会ポスター（保護者・地域配布用）
+【受け手】保護者・地域の方
+【構成】
+- 大見出し：第〇〇回 運動会
+- 日時／場所／対象を大きく
+- 種目ハイライト3つ（イラスト枠）
+- 雨天時の対応・連絡先
+【デザイン】A3縦／青空をイメージした水色＋白／角丸／日本語フォント
+【ルール】固有名詞は後で差し込む空欄で残す／公式な敬体</code></pre>
 
-【手順】
-1. 入力から事実を抜き出す
-2. 観点に紐付けて整理する
-3. 上のルールに従って文章化する
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">レシピ④ ── 単元ワンペーパー（保護者向け）</h4>
+    <pre><code>【目的】算数「分数のたし算ひき算」単元ワンペーパー
+【受け手】保護者（家庭学習の伴走用）
+【構成】
+- 単元の目標（1段落・易しい言葉で）
+- つまずきポイント3つ（家での声かけ例つき）
+- 家でできる練習（5分でできるもの3つ）
+- 単元末テスト時期と評価観点
+【デザイン】A4横／落ち着いた緑系／表組みは罫線控えめ
+【ルール】専門用語には括弧書きで説明／高圧的な表現は避ける</code></pre>
 
-【最後に】
-- 確認したい点があれば箇条書きで添える</code></pre>
-
-    <p>4つのブロック（役割／入力／出力ルール／手順）を埋めれば、それだけでプロンプトとして十分機能します。所見も通信も単元計画も、この型から派生で書けます。</p>
+    <h4 style="font-family:'Noto Serif JP',serif;font-size:1.05rem;margin:1.6rem 0 .8rem">レシピ⑤ ── 個別の支援計画ひな型（仮名版）</h4>
+    <pre><code>【目的】個別の教育支援計画 記入用ひな型
+【受け手】特別支援学級担任・関係職員
+【構成】
+- 児童プロフィール（仮名・学年）
+- 強み／配慮事項／合理的配慮
+- 学期ごとの目標と手立て
+- 関係機関連携欄
+【デザイン】A4縦／落ち着いた配色／記入欄は罫線あり
+【ルール】個人情報は一切含めない／差し替え可能な空欄を明示</code></pre>
 
     <div class="callout good">
-      <div class="callout__label">よくある失敗とその直し方</div>
-      <p>① <strong>出力が長すぎる</strong> → 「120字以内」と字数を明記<br/>
-      ② <strong>同じ言い回しが多い</strong> → 「同じ語尾を3回以上連続させない」<br/>
-      ③ <strong>子どもの実態に合わない</strong> → 「少人数・特別支援にも対応した補足を1段落つける」<br/>
-      ④ <strong>学校の慣例とズレる</strong> → 避けたい語をリスト化して Instructions に追加<br/>
-      ⑤ <strong>急に断定的になる</strong> → 「断定を避け、可能性として書く」と明記</p>
+      <div class="callout__label">指示文の汎用型（5項目）</div>
+      <p>どのレシピも <strong>【目的】【受け手】【構成】【デザイン】【ルール】</strong> の5項目で書かれています。これが <strong>Claude Design の汎用プロンプト型</strong>。慣れたらこの型から、所見一覧表・座席表・行事マニュアル・PTA配布物・健康観察票など、何でも派生で書けます。<br/>
+      ChatでもCoworkでも応用が効く型なので、ぜひ手に馴染ませてください。</p>
     </div>
+
+    <div class="callout warn">
+      <div class="callout__label">完成物の取り扱いで気をつけること</div>
+      <p>① <strong>児童名・連絡先・住所</strong>は、Designに渡す指示にも、生成物にも入れない。差し込みは最後に手作業で<br/>
+      ② <strong>共有URL</strong>は組織内設定をデフォルトに。外部公開設定で誤って配信しないよう注意<br/>
+      ③ <strong>校外配布物（ポスター・通信）</strong>は印刷前に同僚・管理職レビューを通す。AI生成物だからこそ、人の目を最後に挟む<br/>
+      ④ <strong>研究授業のスライド</strong>は、PPTXで書き出して校内サーバーに置けば、来年の自分・同僚が再利用できる「<strong>学校の財産</strong>」に育つ</p>
+    </div>
+
+    <p>STAGE 02 はここまで。Chat・Cowork・Designの3窓口を行き来しながら、<strong>ブラウザとデスクトップだけで</strong>校務の8割を回せる感覚をぜひ味わってください。STAGE 03 では、いよいよ<strong>PCの中に住まう「もう一人のあなた」</strong>＝ Cursor × Claude Code に進んでいきます。</p>
   </article>
 </section>
 
@@ -1402,15 +1473,15 @@ A児・B児・C児（仮名）の特性に応じた補足案を最後に1段落�
       </li>
       <li class="day">
         <div class="day__no">DAY 03</div>
-        <h4 class="day__title">Projects に挑戦</h4>
-        <p class="day__body">「学級経営」Project を作って、Instructions に自分のルール（文体・避けたい語）を入れる。同じ依頼を投げて違いを見る。</p>
-        <span class="day__time">⏱ 40分</span>
+        <h4 class="day__title">Claude Design でスライドを作る</h4>
+        <p class="day__body"><code>claude.ai/design</code> にアクセスし、授業スライド10枚を【目的・受け手・構成・デザイン・ルール】の5項目で発注。インラインコメントと調整ノブで仕上げる。</p>
+        <span class="day__time">⏱ 45分</span>
       </li>
       <li class="day">
         <div class="day__no">DAY 04</div>
-        <h4 class="day__title">学級通信のひな型を作る</h4>
-        <p class="day__body">Artifacts で HTML の通信レイアウトを生成。色・余白・写真スペースの指示を試す。</p>
-        <span class="day__time">⏱ 45分</span>
+        <h4 class="day__title">Claude Design で学級通信を1枚</h4>
+        <p class="day__body">A4一枚の学級通信レシピをコピーし、自分の学級用に書き換えて生成。PDFで書き出して印刷確認まで通す。</p>
+        <span class="day__time">⏱ 40分</span>
       </li>
       <li class="day">
         <div class="day__no">DAY 05</div>
@@ -1692,8 +1763,10 @@ A児・B児・C児（仮名）の特性に応じた補足案を最後に1段落�
       <dt>Cursor</dt><dd>VS Code をベースにしたAI内蔵エディタ。Claude Code との相性が抜群。本講座推奨。</dd>
       <dt>Projects</dt><dd>Knowledge（資料）と Instructions（ルール）を Claude に持たせる Claude.ai の機能。毎回の貼り直しが不要に。</dd>
       <dt>Artifacts</dt><dd>Claude の生成物を専用キャンバスに表示する機能。HTML・スライド・コードがその場でプレビューできる。</dd>
-      <dt>Cowork</dt><dd>Claude と「同僚のように」協働する使い方の総称。本講座で扱う基本姿勢。</dd>
-      <dt>Design</dt><dd>Claude にレイアウト・スライド・通信物などのビジュアルを生成させる使い方。</dd>
+      <dt>Claude Cowork</dt><dd>Claude Desktop アプリで動く「AI同僚」ツール（2026年1月公開）。Tasksモードで PC 内のファイル操作・ブラウザ操作・スケジュール実行まで自律的にこなす。Pro / Max / Team / Enterprise で利用可。</dd>
+      <dt>Claude Design</dt><dd>claude.ai/design で動く<strong>ビジュアル制作専用ツール</strong>（2026年4月公開／Anthropic Labs）。スライド・通信・ポスター・モックアップを束で生成し、キャンバス上で直接編集できる。PDF/PPTX/HTML/Canva にエクスポート可。</dd>
+      <dt>Connectors（Cowork）</dt><dd>Cowork が触れる外部サービスを有効化する設定。Gmail・Drive・Calendar・Chrome など。OAuth で許可した範囲だけアクセス。</dd>
+      <dt>Scheduled（Cowork）</dt><dd>Cowork に定期タスクを仕込む機能。「毎週月曜 7:00」のような自然指定で OK。</dd>
       <dt>CLAUDE.md</dt><dd>プロジェクトフォルダの直下に置く設定ファイル。Claude Code がセッション開始時に自動で読む。</dd>
       <dt>Skill</dt><dd>Claude Code に「自分の仕事のやり方」を覚えさせるマニュアル。SKILL.md 1枚で完結。</dd>
       <dt>Slash Commands</dt><dd>「/名前」で呼び出せるショートカット。よく使う依頼をワンキー化できる。</dd>
