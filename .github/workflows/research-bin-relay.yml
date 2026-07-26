@@ -18,6 +18,7 @@ jobs:
         run: |
           test -n "$URL" && test -n "$TOKEN"
           jq -c --arg t "$TOKEN" '. + {token:$t}' research-bin/latest.json > "$RUNNER_TEMP/payload.json"
-          RES=$(curl -sL -X POST -H 'Content-Type: application/json' --data @"$RUNNER_TEMP/payload.json" "$URL")
+          # -X POST は付けない（302先へPOSTを強制してしまいGAS応答が404になる）
+          RES=$(curl -sL -H 'Content-Type: application/json' --data @"$RUNNER_TEMP/payload.json" "$URL")
           echo "webhook response: $RES"
           echo "$RES" | grep -q '"ok":true'
