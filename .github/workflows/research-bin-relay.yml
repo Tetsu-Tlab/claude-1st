@@ -1,0 +1,23 @@
+name: research-bin-relay
+# 朝のリサーチ便: クラウドエージェントが research-bin/latest.json をpush →
+# このActionが承認ゲート付きGAS Webhookへ中継する（登録者への配信は人間の承認後のみ）
+on:
+  push:
+    branches: [main, research-bin]
+    paths: ['research-bin/latest.json']
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post to approval-gated webhook
+        env:
+          URL: ${{ secrets.TLAB_MORNING_WEBHOOK_URL }}
+          TOKEN: ${{ secrets.TLAB_MORNING_TOKEN }}
+        run: |
+          test -n "$URL" && test -n "$TOKEN"
+          jq -c --arg t "$TOKEN" '. + {token:$t}' research-bin/latest.json > "$RUNNER_TEMP/payload.json"
+          RES=$(curl -sL -X POST -H 'Content-Type: application/json' --data @"$RUNNER_TEMP/payload.json" "$URL")
+          echo "webhook response: $RES"
+          echo "$RES" | grep -q '"ok":true'
