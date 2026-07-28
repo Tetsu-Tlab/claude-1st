@@ -1,9 +1,11 @@
 name: research-bin-relay
 # 朝のリサーチ便: クラウドエージェントが research-bin/latest.json をpush →
 # このActionが承認ゲート付きGAS Webhookへ中継する（登録者への配信は人間の承認後のみ）
+# クラウドセッションのgitプロキシは claude/ プレフィックス以外へのpushを403で拒否するため
+# claude/research-bin を正式な配信ブランチとする（main・research-binは手動運用時の互換）
 on:
   push:
-    branches: [main, research-bin]
+    branches: [main, research-bin, claude/research-bin]
     paths: ['research-bin/latest.json']
 
 jobs:
